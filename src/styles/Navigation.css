@@ -33,3 +33,34 @@
     fill: orange;  
   }
   
+
+
+  /* Media Queries for responsive design */
+
+/*  768px och mindre (mobiler och iPads) */
+@media (max-width: 768px) {
+    .navbar {
+      flex-direction: row; 
+      padding: 0.5rem;
+    }
+  
+    .navbar a {
+      padding: 0.75rem 1rem;
+      font-size: 1rem; 
+    }
+  
+    .bookmark-icon {
+      margin-top: 0.5rem; 
+      margin-left: auto;  
+
+    }
+  }
+  
+  /* För större iPads och mindre laptops (upp till 1024px) */
+  @media (max-width: 1024px) {
+    .navbar a {
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem; 
+    }
+  }
+  
