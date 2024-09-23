@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navigation from "./navigation/Navigate";
+import Navigation from "./Navigation/Navigate";
 
 const App: React.FC = () => {
   return (
