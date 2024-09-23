@@ -1,5 +1,7 @@
 const Home: React.FC = () => {
-    return <div>Hem Sidan</div>;
+    return <div>
+         <h1>Startsida</h1>
+        </div>;
   };
   
   export default Home;
