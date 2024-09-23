@@ -15,7 +15,21 @@
   }
   
   .navbar a:hover {
-    background-color: #555; /* hover när man klickar */
+    background-color: #555; 
     border-radius: 5px;
+  }
+
+
+  /* Icon styling */
+  .bookmark-icon {
+    margin-left: auto;  
+  }
+  
+  .bookmark-icon svg {
+    fill: yellow;  
+  }
+  
+  .bookmark-icon:hover svg {
+    fill: orange;  
   }
   
