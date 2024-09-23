@@ -13,6 +13,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Synthetic imports */
+    "allowSyntheticDefaultImports": true,  // Lägg till detta
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
