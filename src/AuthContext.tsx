@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -11,7 +12,17 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return Cookies.get("isAuthenticated") === "true";
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      Cookies.set("isAuthenticated", "true"); // Session cookie
+    } else {
+      Cookies.remove("isAuthenticated");
+    }
+  }, [isAuthenticated]);
 
   const login = () => setIsAuthenticated(true);
   const logout = () => setIsAuthenticated(false);
