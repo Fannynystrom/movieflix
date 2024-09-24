@@ -1,32 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Om du använder React Router för navigation
+import { Link } from "react-router-dom";
+import { FaBookmark } from "react-icons/fa";
 
-const Navigation: React.FC = () => {
+import "../styles/Navigation.css";
+
+const Navigate: React.FC = () => {
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-lg font-bold">MovieApp</div>
-        <ul className="hidden md:flex space-x-4">
-          <li>
-            <Link to="/" className="text-white">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/trending" className="text-white">
-              Trending
-            </Link>
-          </li>
-          <li>
-            <Link to="/recommended" className="text-white">
-              Recommended
-            </Link>
-          </li>
-        </ul>
-        <button className="md:hidden text-white">Menu</button>
-      </div>
+    <nav className="navbar">
+      <Link to="/">Startsida</Link>
+      <Link to="/Categories">Kategorier</Link>
+
+      <Link to="/bookmarked" className="bookmark-icon">
+        <FaBookmark size={24} />
+      </Link>
     </nav>
   );
 };
 
-export default Navigation;
+export default Navigate;

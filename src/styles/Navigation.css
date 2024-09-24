@@ -1,0 +1,61 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #333; /* bakgrundsfärg på menyn */
+  padding: 1rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.navbar a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Icon styling */
+.bookmark-icon {
+  margin-left: auto;
+}
+
+.bookmark-icon svg {
+  fill: yellow;
+}
+
+.bookmark-icon:hover svg {
+  fill: orange;
+}
+
+/* Media Queries for responsive design */
+
+/*  768px och mindre (mobiler och iPads) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    padding: 0.5rem;
+  }
+
+  .navbar a {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .bookmark-icon {
+    margin-top: 0.5rem;
+    margin-left: auto;
+  }
+}
+
+/* För större iPads och mindre laptops (upp till 1024px) */
+@media (max-width: 1024px) {
+  .navbar a {
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+  }
+}
