@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import MovieCard from "./MovieCard"; // Importera MovieCard
+import MovieCard from "../Components/MovieCard"; // Importera MovieCard
 import thething from "../assets/thething.jpg"; // Importera din standardbild
 import "../styles/slider.css"; // Importera slider-stilen
 import "../styles/MovieCard.css"; // Importera MovieCard-stilen
