@@ -2,32 +2,32 @@
 
 /* Swiper container style */
 .carousel-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  /* Swiper navigation buttons */
-  .swiper-button-prev, .swiper-button-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 50%;
-    padding: 10px;
-    z-index: 2;
-  }
-  
-  .swiper-button-prev:hover, .swiper-button-next:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Swiper pagination dots */
-  .swiper-pagination-bullet {
-    background-color: white;
-  }
-  
-  .swiper-pagination-bullet-active {
-    background-color: #ffcc00; /* Gul färg för den aktiva pagination-pricken */
-  }
-  
-  
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Swiper navigation buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 2;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Swiper pagination dots */
+.swiper-pagination-bullet {
+  background-color: white;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffcc00; /* Gul färg för den aktiva pagination-pricken */
+}
