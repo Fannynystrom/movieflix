@@ -43,6 +43,8 @@ const TrendingCarousel: React.FC = () => {
               title={movie.title}
               imageUrl={thething} // Använd standardbilden om poster är undefined
               description="Description not available"
+              ageRating="18"
+              duration="100"
             />
           </SwiperSlide>
         ))}
