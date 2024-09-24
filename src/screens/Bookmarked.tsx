@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // Typa komponenten som en funktionell komponent med React.FC
 const BookMarked: React.FC = () => {

@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaBookmark } from 'react-icons/fa'; 
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaBookmark } from "react-icons/fa";
 
-import '../styles/Navigation.css';  
-
+import "../styles/Navigation.css";
 
 const Navigate: React.FC = () => {
   return (

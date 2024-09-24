@@ -14,7 +14,7 @@
     "jsx": "react-jsx",
 
     /* Synthetic imports */
-    "allowSyntheticDefaultImports": true,  // Lägg till detta
+    "allowSyntheticDefaultImports": true, // Lägg till detta
 
     /* Linting */
     "strict": true,
