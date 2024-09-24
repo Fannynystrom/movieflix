@@ -1,55 +1,52 @@
 import React from "react";
-import Slider from "react-slick";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import MovieCard from "./MovieCard"; // Importera MovieCard
+import thething from "../assets/thething.jpg"; // Importera din standardbild
+import "../styles/slider.css"; // Importera slider-stilen
+import "../styles/MovieCard.css"; // Importera MovieCard-stilen
 
-// Typdefinition för en film
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 interface Movie {
   id: number;
   title: string;
-  poster: string;
+  poster?: string;
 }
 
-// Mockade filmer (ersätt med riktiga data från API)
 const trendingMovies: Movie[] = [
   { id: 1, title: "Movie 1", poster: "https://via.placeholder.com/150" },
   { id: 2, title: "Movie 2", poster: "https://via.placeholder.com/150" },
   { id: 3, title: "Movie 3", poster: "https://via.placeholder.com/150" },
   { id: 4, title: "Movie 4", poster: "https://via.placeholder.com/150" },
-  { id: 5, title: "Movie 5", poster: "https://via.placeholder.com/150" },
+  { id: 5, title: "Movie 5" }, // Ingen bild, kommer att använda default-bild
 ];
 
 const TrendingCarousel: React.FC = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 768, // Mobilanpassning
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
-    <div className="trending-carousel p-4">
+    <div className="carousel-container">
       <h2 className="text-2xl font-bold mb-4">Trending Movies</h2>
-      <Slider {...settings}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+      >
         {trendingMovies.map((movie) => (
-          <div key={movie.id} className="p-2">
-            <img
-              src={movie.poster}
-              alt={movie.title}
-              className="w-full h-auto"
+          <SwiperSlide key={movie.id}>
+            <MovieCard
+              title={movie.title}
+              imageUrl={thething} // Använd standardbilden om poster är undefined
+              description="Description not available"
             />
-            <h3 className="text-center mt-2">{movie.title}</h3>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </div>
   );
 };

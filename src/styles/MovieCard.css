@@ -1,0 +1,108 @@
+.movie-card {
+  background-color: #141414; /* Netflix mörka bakgrundsfärg */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-card .p-4 {
+  padding: 16px;
+  text-align: center;
+}
+
+.movie-card h3 {
+  color: #ffffff; /* Vit rubrik */
+  margin-bottom: 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.movie-card p {
+  color: #b0b0b0; /* Grå text för beskrivning */
+  font-size: 0.9rem;
+}
+
+/* Action buttons (like, play, add) */
+.movie-card-actions {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px 16px;
+}
+
+.movie-card-actions button {
+  background-color: transparent; /* Transparenta knappar */
+  color: #e0e0e0; /* Ljus textfärg */
+  border: 1px solid #e0e0e0; /* Ljus kantfärg */
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border 0.2s;
+}
+
+.movie-card-actions button:hover {
+  background-color: #e50914; /* Netflix-röd bakgrund vid hover */
+  color: #ffffff;
+  border: 1px solid #e50914;
+}
+
+/* Dropdown button */
+.dropdown-button {
+  background-color: transparent;
+  border: none;
+  color: #e0e0e0;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.dropdown-button:hover {
+  color: #e50914; /* Röd färg vid hover */
+}
+
+/* Dropdown content */
+.movie-card-details {
+  display: none; /* Initialt dold */
+  background-color: #1e1e1e; /* Mörkare grå för dropdown-bakgrund */
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+  color: #d0d0d0;
+  border-top: 1px solid #333; /* Tunn gräns för separation */
+}
+
+.movie-card-details p {
+  margin: 4px 0;
+}
+
+.movie-card.show-details .movie-card-details {
+  display: block; /* Visa när dropdown är aktiv */
+}
+
+/* För bättre responsiv design */
+@media (max-width: 768px) {
+  .movie-card {
+    max-width: 100%;
+  }
+}
+
