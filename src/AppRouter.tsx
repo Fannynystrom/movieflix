@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation from "./navigation/Navigate";
 import Home from "./screens/Home";
 import BookMarked from "./screens/Bookmarked";
-import Categories from "./screens/Categories";
+import CategoriesPage from "./screens/Categories";
 //import Admin from './screens/Admin';
 //import MovieView from './screens/MovieView';
 
@@ -13,7 +13,7 @@ const AppRouter: React.FC = () => {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories" element={<CategoriesPage />} />
 
         <Route path="/bookmarked" element={<BookMarked />} />
       </Routes>
