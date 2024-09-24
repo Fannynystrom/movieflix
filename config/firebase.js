@@ -1,8 +1,8 @@
 // firebase.js
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 // import { getAnalytics } from 'firebase/analytics';
-import { getDatabase } from 'firebase/database';
-import dotenv from 'dotenv';
+import { getDatabase } from "firebase/database";
+import dotenv from "dotenv";
 
 dotenv.config(); // Ladda miljövariabler från .env-filen
 
@@ -15,7 +15,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-  databaseURL: process.env.FIREBASE_DATABASE_URL
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
 };
 
 // Initiera Firebase
