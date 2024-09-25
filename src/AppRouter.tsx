@@ -4,6 +4,8 @@ import Navigation from "./navigation/Navigate";
 import Home from "./screens/Home";
 import BookMarked from "./screens/Bookmarked";
 import Categories from "./screens/Categories";
+import TrendingCarousel from "./screens/TrendingCarousel";
+// import TrendingCarousel from "../components/
 //import Admin from './screens/Admin';
 //import MovieView from './screens/MovieView';
 
@@ -13,6 +15,7 @@ const AppRouter: React.FC = () => {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/trendingcarousel" element={<TrendingCarousel />} />
         <Route path="/categories" element={<Categories />} />
 
         <Route path="/bookmarked" element={<BookMarked />} />
