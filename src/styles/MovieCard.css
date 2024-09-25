@@ -48,6 +48,7 @@
   justify-content: space-around;
   width: 100%;
   padding: 10px 16px;
+  margin-bottom: 10px; /* Extra spacing under buttons */
 }
 
 .movie-card-actions button {
@@ -62,6 +63,7 @@
     background-color 0.2s,
     color 0.2s,
     border 0.2s;
+  margin: 0 8px; /* Spacing mellan knappar */
 }
 
 .movie-card-actions button:hover {
@@ -108,5 +110,15 @@
 @media (max-width: 768px) {
   .movie-card {
     max-width: 100%;
+  }
+
+  .movie-card-actions {
+    flex-direction: column; /* Vertikal layout på mindre skärmar */
+    padding: 8px;
+  }
+
+  .movie-card-actions button {
+    width: 100%; /* Full bredd på mindre skärmar */
+    margin-bottom: 8px;
   }
 }

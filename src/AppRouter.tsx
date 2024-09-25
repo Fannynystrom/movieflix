@@ -11,6 +11,7 @@ import Login from "./screens/Login";
 import Home from "./screens/Home";
 import BookMarked from "./screens/Bookmarked";
 import Categories from "./screens/Categories";
+import TrendingCarousel from "./screens/TrendingCarousel";
 //import Admin from './screens/Admin';
 //import MovieView from './screens/MovieView';
 
@@ -43,6 +44,10 @@ const AppContent: React.FC = () => {
         <Route
           path="/categories"
           element={<ProtectedRoute component={Categories} />}
+        />
+        <Route
+          path="/trendingcarousel"
+          element={<ProtectedRoute component={TrendingCarousel} />}
         />
         <Route
           path="/bookmarked"
