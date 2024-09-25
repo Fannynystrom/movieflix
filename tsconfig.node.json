@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2022", // Använd ES2022 som target
-    "lib": ["es2022"],  // Ändra från ESNext till ES2022
+    "lib": ["es2022"], // Ändra från ESNext till ES2022
     "module": "ESNext",
     "skipLibCheck": true,
 

@@ -38,8 +38,14 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/categories" element={<ProtectedRoute element={<Categories />} />} />
-        <Route path="/bookmarked" element={<ProtectedRoute element={<BookMarked />} />} />
+        <Route
+          path="/categories"
+          element={<ProtectedRoute element={<Categories />} />}
+        />
+        <Route
+          path="/bookmarked"
+          element={<ProtectedRoute element={<BookMarked />} />}
+        />
       </Routes>
     </>
   );

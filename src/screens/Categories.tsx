@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ref, get, child } from "firebase/database";
-import { database } from "../../config/firebase"; 
+import { database } from "../../config/firebase";
 
 const Categories: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
