@@ -10,15 +10,13 @@ import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import BookMarked from "./screens/Bookmarked";
-import CategoriesPage from "./screens/Categories";
-//import Admin from './screens/Admin';
-//import MovieView from './screens/MovieView';
+import Categories from "./screens/Categories";
 
-const ProtectedRoute: React.FC<{ component: React.FC }> = ({
-  component: Component,
+const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({
+  element,
 }) => {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
+  return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
 const AppRouter: React.FC = () => {
@@ -38,10 +36,10 @@ const AppContent: React.FC = () => {
     <>
       {isAuthenticated && <Navigation />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-
-        <Route path="/bookmarked" element={<BookMarked />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
+        <Route path="/categories" element={<ProtectedRoute element={<Categories />} />} />
+        <Route path="/bookmarked" element={<ProtectedRoute element={<BookMarked />} />} />
       </Routes>
     </>
   );

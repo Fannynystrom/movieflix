@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2023"],
+    "target": "es2022", // Använd ES2022 som target
+    "lib": ["es2022"],  // Ändra från ESNext till ES2022
     "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Om du arbetar med Node.js kan det vara bättre att använda "node"
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
