@@ -10,7 +10,7 @@ import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import BookMarked from "./screens/Bookmarked";
-import Categories from "./screens/Categories";
+//import Categories from "./screens/Categories";
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({
   element,
@@ -38,10 +38,10 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
-        <Route
+        {/* <Route
           path="/categories"
           element={<ProtectedRoute element={<Categories />} />}
-        />
+        /> */}
         <Route
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarked />} />}
