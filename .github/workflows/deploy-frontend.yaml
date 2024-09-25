@@ -3,28 +3,28 @@ name: Firebase Hosting Deploy
 on:
   push:
     branches:
-      - main  # Ändra till den branch du vill deploya från
+      - main # Ändra till den branch du vill deploya från
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository content
-      uses: actions/checkout@v2
+      - name: Checkout repository content
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18' # Specificera din Node.js-version
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18" # Specificera din Node.js-version
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build project
-      run: npm run build # Anpassa detta kommando efter ditt projekt
+      - name: Build project
+        run: npm run build # Anpassa detta kommando efter ditt projekt
 
-    - name: Deploy to Firebase Hosting
-      run: firebase deploy --only hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
