@@ -1,34 +1,30 @@
-name: CI/CD Pipeline
+name: Firebase Hosting Deploy
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # Ändra till den branch du vill deploya från
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+    - name: Checkout repository content
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # Specificera din Node.js-version
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      # - name: Run tests
-      #   run: npm test
+    - name: Build project
+      run: npm run build # Anpassa detta kommando efter ditt projekt
 
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+    - name: Deploy to Firebase Hosting
+      run: firebase deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
