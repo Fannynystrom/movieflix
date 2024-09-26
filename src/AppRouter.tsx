@@ -6,14 +6,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
+import { BookmarksProvider } from "./context/BookmarksContext"; // Import the BookmarksProvider
 import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
-import BookMarked from "./screens/Bookmarked";
+import BookMarkedScreen from "./screens/BookmarkedScreen";
 import Categories from "./screens/Categories";
 import TrendingCarousel from "./screens/TrendingCarousel";
-//import Admin from './screens/Admin';
-//import MovieView from './screens/MovieView';
 
 const ProtectedRoute: React.FC<{ component: React.FC }> = ({
   component: Component,
@@ -25,9 +24,11 @@ const ProtectedRoute: React.FC<{ component: React.FC }> = ({
 const AppRouter: React.FC = () => {
   return (
     <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <BookmarksProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </BookmarksProvider>
     </AuthProvider>
   );
 };
@@ -51,7 +52,7 @@ const AppContent: React.FC = () => {
         />
         <Route
           path="/bookmarked"
-          element={<ProtectedRoute component={BookMarked} />}
+          element={<ProtectedRoute component={BookMarkedScreen} />}
         />
       </Routes>
     </>
