@@ -72,6 +72,26 @@
   border: 1px solid #e50914;
 }
 
+/* MovieCard.css */
+
+.movie-card .bookmark-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border: 1px solid #e0e0e0; /* Ljus kantfärg */
+
+}
+
+.movie-card .bookmark-button svg {
+  color: #ffcc00; /* Guld färg för bokmärket */
+  font-size: 24px;
+}
+
+.movie-card .bookmark-button svg:hover {
+  color: #ffaa00; /* Mörkare guld vid hovring */
+}
+
+
 /* Dropdown button */
 .dropdown-button {
   background-color: transparent;

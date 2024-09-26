@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import "../styles/MovieCard.css";
+import React, { useState } from 'react';
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { useBookmarks } from '../context/BookmarksContext';
+import '../styles/MovieCard.css';
 
 interface MovieCardProps {
   title: string;
@@ -21,6 +23,16 @@ const MovieCard: React.FC<MovieCardProps> = ({
   actors,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
+
+  const handleBookmarkClick = () => {
+    const movie = { title, thumbnail, synopsis, rating, genre, year, actors };
+    if (isBookmarked(title)) {
+      removeBookmark(title);
+    } else {
+      addBookmark(movie);
+    }
+  };
 
   return (
     <div className="movie-card">
@@ -29,7 +41,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
         alt={title}
         className="movie-card-img"
         onError={(e) => {
-          (e.target as HTMLImageElement).src = "path/to/fallback-image.jpg"; // Fallback bild
+          (e.target as HTMLImageElement).src = 'path/to/fallback-image.jpg'; // Fallback image
         }}
       />
       <div className="movie-card-content">
@@ -38,14 +50,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
         <div className="movie-card-actions">
           <button className="like-button">❤️ Like</button>
           <button className="play-button">▶️ Play</button>
-          <button className="add-button">➕ Add</button>
-        </div>
+        
 
-        <button
-          className="dropdown-button"
-          onClick={() => setShowDetails(!showDetails)}
-        >
-          {showDetails ? "▲ Less Info" : "▼ More Info"}
+        <button className="bookmark-button" onClick={handleBookmarkClick}>
+          {isBookmarked(title) ? <FaBookmark /> : <FaRegBookmark />}
+        </button>
+        </div>
+        <button className="dropdown-button" onClick={() => setShowDetails(!showDetails)}>
+          {showDetails ? '▲ Less Info' : '▼ More Info'}
         </button>
 
         {showDetails && (
@@ -54,7 +66,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
             <p>Rating: {rating}</p>
             <p>Genre: {genre}</p>
             <p>Year: {year}</p>
-            <p>Actors: {actors.join(", ")}</p>
+            <p>Actors: {actors.join(', ')}</p>
           </div>
         )}
       </div>
