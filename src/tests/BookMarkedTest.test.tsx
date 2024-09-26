@@ -2,10 +2,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import MovieCard from "../components/MovieCard";
 import BookMarkedScreen from "../screens/BookmarkedScreen";
 import { useBookmarks } from "../context/BookmarksContext"; // mockar denna hook
-import '@testing-library/jest-dom';  // För jest-dom matchers
+import "@testing-library/jest-dom"; // För jest-dom matchers
 
 // ersätter useBookmarks-hooken med mockad data från context
-jest.mock('../context/BookmarksContext', () => ({
+jest.mock("../context/BookmarksContext", () => ({
   useBookmarks: jest.fn(),
 }));
 
@@ -78,7 +78,6 @@ test("visar bokmärken när de finns", () => {
   expect(movie2).toBeInTheDocument();
 });
 
-
 // Test 3: testar att lägga till ett bokmärke och uppdatera localStorage
 test("lägger till ett bokmärke och uppdaterar localStorage", () => {
   const mockAddBookmark = jest.fn((movie) => {
@@ -104,7 +103,7 @@ test("lägger till ett bokmärke och uppdaterar localStorage", () => {
   expect(mockIsBookmarked(mockMovie.title)).toBe(false);
 
   // hitta knappen med querySelector
-  const bookmarkButton = container.querySelector('.bookmark-button');
+  const bookmarkButton = container.querySelector(".bookmark-button");
   expect(bookmarkButton).toBeInTheDocument();
 
   fireEvent.click(bookmarkButton!);
@@ -114,7 +113,7 @@ test("lägger till ett bokmärke och uppdaterar localStorage", () => {
   // kollar att localStorage har uppdaterats med den nya filmen
   expect(setItemSpy).toHaveBeenCalledWith(
     "bookmarks",
-    JSON.stringify([mockMovie])
+    JSON.stringify([mockMovie]),
   );
 
   // uppdaterar mock - simulerar att bokmärke lagts till
@@ -125,7 +124,6 @@ test("lägger till ett bokmärke och uppdaterar localStorage", () => {
 
   expect(mockIsBookmarked(mockMovie.title)).toBe(true);
 });
-
 
 // Test 4: testar att ta bort ett bokmärke och uppdatera localStorage
 test("tar bort ett bokmärke och uppdaterar localStorage", () => {
@@ -139,7 +137,7 @@ test("tar bort ett bokmärke och uppdaterar localStorage", () => {
   // mockar localStorage.setItem
   const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
 
-  // mockar useBookmarks 
+  // mockar useBookmarks
   (useBookmarks as jest.Mock).mockReturnValue({
     bookmarks: [mockMovie],
     addBookmark: mockAddBookmark,
@@ -153,7 +151,7 @@ test("tar bort ett bokmärke och uppdaterar localStorage", () => {
   expect(mockIsBookmarked(mockMovie.title)).toBe(true);
 
   // hitta knappen med querySelector
-  const bookmarkButton = container.querySelector('.bookmark-button');
+  const bookmarkButton = container.querySelector(".bookmark-button");
   expect(bookmarkButton).toBeInTheDocument();
 
   fireEvent.click(bookmarkButton!);
@@ -161,12 +159,9 @@ test("tar bort ett bokmärke och uppdaterar localStorage", () => {
   expect(mockRemoveBookmark).toHaveBeenCalledWith(mockMovie.title);
 
   // kollar att localStorage har uppdaterats
-  expect(setItemSpy).toHaveBeenCalledWith(
-    "bookmarks",
-    JSON.stringify([])
-  );
+  expect(setItemSpy).toHaveBeenCalledWith("bookmarks", JSON.stringify([]));
 
-  // uppdaterar mock 
+  // uppdaterar mock
   mockIsBookmarked.mockReturnValue(false);
 
   // renderar om komponenten för att simulera att listan har uppdaterats
