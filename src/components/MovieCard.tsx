@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
-import { useBookmarks } from '../context/BookmarksContext';
-import '../styles/MovieCard.css';
+import React, { useState } from "react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { useBookmarks } from "../context/BookmarksContext";
+import "../styles/MovieCard.css";
 
 interface MovieCardProps {
   title: string;
@@ -32,7 +32,7 @@ const MovieCard: React.FC<MovieCardProps> = (props) => {
         alt={props.title}
         className="movie-card-img"
         onError={(e) => {
-          (e.target as HTMLImageElement).src = 'path/to/fallback-image.jpg';
+          (e.target as HTMLImageElement).src = "path/to/fallback-image.jpg";
         }}
       />
       <div className="movie-card-content">
@@ -52,7 +52,7 @@ const MovieCard: React.FC<MovieCardProps> = (props) => {
           className="dropdown-button"
           onClick={() => setShowDetails(!showDetails)}
         >
-          {showDetails ? '▲ Less Info' : '▼ More Info'}
+          {showDetails ? "▲ Less Info" : "▼ More Info"}
         </button>
 
         {showDetails && (
@@ -61,7 +61,7 @@ const MovieCard: React.FC<MovieCardProps> = (props) => {
             <p>Rating: {props.rating}</p>
             <p>Genre: {props.genre}</p>
             <p>Year: {props.year}</p>
-            <p>Actors: {props.actors.join(', ')}</p>
+            <p>Actors: {props.actors.join(", ")}</p>
           </div>
         )}
       </div>

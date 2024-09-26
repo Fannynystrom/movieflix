@@ -1,7 +1,7 @@
-import React from 'react';
-import MovieCard from '../components/MovieCard';
-import { useBookmarks } from '../context/BookmarksContext';
-import '../styles/BookMarkedStyles.css';
+import React from "react";
+import MovieCard from "../components/MovieCard";
+import { useBookmarks } from "../context/BookmarksContext";
+import "../styles/BookMarkedStyles.css";
 
 const BookMarkedScreen: React.FC = () => {
   const { bookmarks } = useBookmarks();
