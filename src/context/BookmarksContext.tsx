@@ -28,15 +28,11 @@ export const useBookmarks = (): BookmarksContextType => {
 };
 
 export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [bookmarks, setBookmarks] = useState<Movie[]>([]);
-
-  // Ladda bokmärken från localStorage vid montering
-  useEffect(() => {
+  // Använd en Lazy Initializer-funktion för att sätta initialt state från localStorage
+  const [bookmarks, setBookmarks] = useState<Movie[]>(() => {
     const storedBookmarks = localStorage.getItem('bookmarks');
-    if (storedBookmarks) {
-      setBookmarks(JSON.parse(storedBookmarks));
-    }
-  }, []);
+    return storedBookmarks ? JSON.parse(storedBookmarks) : [];
+  });
 
   // Spara bokmärken till localStorage när de ändras
   useEffect(() => {

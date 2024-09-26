@@ -1,0 +1,24 @@
+
+.bookmarked-screen {
+    padding: 20px;
+  }
+  
+  .bookmarked-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .bookmarked-movies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; 
+  }
+  
+  /* Justera MovieCard-storleken inom grid */
+  .bookmarked-movies-grid .movie-card {
+    flex: 1 1 200px; 
+    max-width: 300px; 
+  }
+  

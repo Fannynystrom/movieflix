@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieCard from '../components/MovieCard';
 import { useBookmarks } from '../context/BookmarksContext';
+import '../styles/BookMarkedStyles.css';
 
 const BookMarkedScreen: React.FC = () => {
   const { bookmarks } = useBookmarks();
@@ -10,9 +11,9 @@ const BookMarkedScreen: React.FC = () => {
   }
 
   return (
-    <div className="bookmarked-movies">
-      <h2>Dina Bokmärkta Filmer</h2>
-      <div className="movie-list">
+    <div className="bookmarked-screen">
+      <h2 className="bookmarked-title">Dina bokmärkta filmer</h2>
+      <div className="bookmarked-movies-grid">
         {bookmarks.map((movie, index) => (
           <MovieCard
             key={index}
