@@ -2,16 +2,16 @@ import React from 'react';
 import MovieCard from '../components/MovieCard';
 import { useBookmarks } from '../context/BookmarksContext';
 
-const BookMarked: React.FC = () => {
+const BookMarkedScreen: React.FC = () => {
   const { bookmarks } = useBookmarks();
 
   if (bookmarks.length === 0) {
-    return <p>You have no bookmarked movies.</p>;
+    return <p>Du har inga bokmärkta filmer.</p>;
   }
 
   return (
     <div className="bookmarked-movies">
-      <h2>Your Bookmarked Movies</h2>
+      <h2>Dina Bokmärkta Filmer</h2>
       <div className="movie-list">
         {bookmarks.map((movie, index) => (
           <MovieCard
@@ -30,4 +30,4 @@ const BookMarked: React.FC = () => {
   );
 };
 
-export default BookMarked;
+export default BookMarkedScreen;

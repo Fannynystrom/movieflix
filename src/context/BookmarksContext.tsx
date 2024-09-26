@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 interface Movie {
   title: string;
@@ -29,6 +29,19 @@ export const useBookmarks = (): BookmarksContextType => {
 
 export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [bookmarks, setBookmarks] = useState<Movie[]>([]);
+
+  // Ladda bokmärken från localStorage vid montering
+  useEffect(() => {
+    const storedBookmarks = localStorage.getItem('bookmarks');
+    if (storedBookmarks) {
+      setBookmarks(JSON.parse(storedBookmarks));
+    }
+  }, []);
+
+  // Spara bokmärken till localStorage när de ändras
+  useEffect(() => {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }, [bookmarks]);
 
   const addBookmark = (movie: Movie) => {
     setBookmarks((prevBookmarks) => [...prevBookmarks, movie]);
