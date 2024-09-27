@@ -107,7 +107,6 @@
 
 /* Dropdown content */
 .movie-card-details {
-  display: none; /* Initialt dold */
   background-color: #1e1e1e; /* Mörkare grå för dropdown-bakgrund */
   padding: 16px;
   width: 100%;

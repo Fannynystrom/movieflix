@@ -1,6 +1,90 @@
+// import { useState, useEffect } from "react";
+// import { ref, onValue, DataSnapshot, Unsubscribe } from "firebase/database";
+// import { database } from "../../config/firebase";
+
+// interface Movie {
+//   title: string;
+//   genre: string;
+//   rating: string;
+//   synopsis: string;
+//   thumbnail: string;
+//   year: number;
+//   actors: string[];
+// }
+
+// interface FirebaseMovieData {
+//   [key: string]: {
+//     title: string;
+//     genre: string;
+//     rating: string;
+//     synopsis: string;
+//     thumbnail: string;
+//     year: number;
+//     actors?: string[];
+//   };
+// }
+
+// interface UseFetchMoviesResult {
+//   movies: Movie[];
+//   loading: boolean;
+//   error: string | null;
+// }
+
+// const useFetchMovies = (randomize: boolean = false): UseFetchMoviesResult => {
+//   const [movies, setMovies] = useState<Movie[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     const moviesRef = ref(database, "movies");
+
+//     const handleData = (snapshot: DataSnapshot) => {
+//       if (snapshot.exists()) {
+//         const data: FirebaseMovieData = snapshot.val();
+//         let moviesArray: Movie[] = Object.keys(data).map((key) => ({
+//           title: data[key].title,
+//           genre: data[key].genre,
+//           rating: data[key].rating,
+//           synopsis: data[key].synopsis,
+//           thumbnail: data[key].thumbnail,
+//           year: data[key].year,
+//           actors: data[key].actors || [],
+//         }));
+
+//         if (randomize) {
+//           moviesArray = moviesArray.sort(() => Math.random() - 0.5); // Slumpmässig ordning
+//         }
+
+//         setMovies(moviesArray);
+//         setLoading(false);
+//       } else {
+//         setMovies([]);
+//         setLoading(false);
+//       }
+//     };
+
+//     const handleError = (error: Error) => {
+//       setError(error.message);
+//       setLoading(false);
+//     };
+
+//     const unsubscribe: Unsubscribe = onValue(
+//       moviesRef,
+//       handleData,
+//       handleError,
+//     );
+
+//     return () => unsubscribe();
+//   }, [randomize]);
+
+//   return { movies, loading, error };
+// };
+
+// export default useFetchMovies;
+
 import { useState, useEffect } from "react";
 import { ref, onValue, DataSnapshot, Unsubscribe } from "firebase/database";
-import { database } from "../../config/firebase"; // Justera sökvägen efter din mappstruktur
+import { database } from "../../config/firebase";
 
 interface Movie {
   title: string;
@@ -30,26 +114,31 @@ interface UseFetchMoviesResult {
   error: string | null;
 }
 
-const useFetchMovies = (): UseFetchMoviesResult => {
+const useFetchMovies = (randomize: boolean = false): UseFetchMoviesResult => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const moviesRef = ref(database, "movies"); // Justera 'movies' till rätt path om det behövs
+    const moviesRef = ref(database, "movies");
 
     const handleData = (snapshot: DataSnapshot) => {
       if (snapshot.exists()) {
         const data: FirebaseMovieData = snapshot.val();
-        const moviesArray: Movie[] = Object.keys(data).map((key) => ({
+        let moviesArray: Movie[] = Object.keys(data).map((key) => ({
           title: data[key].title,
           genre: data[key].genre,
           rating: data[key].rating,
           synopsis: data[key].synopsis,
           thumbnail: data[key].thumbnail,
           year: data[key].year,
-          actors: data[key].actors || [], // Hantera eventuellt avsaknad av actors
+          actors: data[key].actors || [],
         }));
+
+        if (randomize) {
+          moviesArray = moviesArray.sort(() => Math.random() - 0.5); // Slumpmässig ordning
+        }
+
         setMovies(moviesArray);
         setLoading(false);
       } else {
@@ -63,16 +152,14 @@ const useFetchMovies = (): UseFetchMoviesResult => {
       setLoading(false);
     };
 
-    // Abonnera på ändringar
     const unsubscribe: Unsubscribe = onValue(
       moviesRef,
       handleData,
       handleError,
     );
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, []);
+  }, [randomize]);
 
   return { movies, loading, error };
 };
