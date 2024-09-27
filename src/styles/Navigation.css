@@ -1,10 +1,11 @@
 .navbar {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  background-color: #333; /* bakgrundsfärg på menyn */
-  padding: 1rem;
+  background-color: #333;
+  padding: 10px;
+  position: relative;
 }
 
 .navbar a {
@@ -19,9 +20,10 @@
   border-radius: 5px;
 }
 
-/* Icon styling */
 .bookmark-icon {
   margin-left: auto;
+  z-index: 2;
+  position: relative;
 }
 
 .bookmark-icon svg {
@@ -30,6 +32,74 @@
 
 .bookmark-icon:hover svg {
   fill: orange;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin-right: 10px;
+  z-index: 2;
+}
+
+.search-field {
+  width: 0;
+  opacity: 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* background-color: white; */
+  transition:
+    width 0.4s ease,
+    opacity 0.4s ease;
+  position: absolute;
+  right: 45px;
+  z-index: 1;
+}
+
+.search-field.active {
+  width: 200px;
+  opacity: 1;
+}
+
+.search-results {
+  position: absolute;
+  top: 40px;
+  width: 200px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 2;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.search-results li:hover {
+  background-color: #f1f1f1;
+}
+
+.search-results li a {
+  text-decoration: none;
+  color: black;
 }
 
 /* Media Queries for responsive design */
