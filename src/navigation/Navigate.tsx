@@ -10,11 +10,12 @@ const Navigate: React.FC = () => {
 
   return (
     <nav className="navbar">
-
-      <Link to="/">Startsida</Link>
-      <Link to="/categoriesscreen">Kategorier</Link>
-      <Link to="/trendingcarousel">Trending</Link>
-      <Link to="/recommendedcarousel">Recommended</Link>
+      <div>
+        <Link to="/">Startsida</Link>
+        <Link to="/categories">Kategorier</Link>
+        <Link to="/trendingcarousel">Trending</Link>
+        <Link to="/recommendedcarousel">Recommended</Link>
+      </div>
       <div className="icons">
         <SearchBar data={movies} />
         <Link to="/bookmarked" className="bookmark-icon">
