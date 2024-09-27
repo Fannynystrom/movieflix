@@ -1,18 +1,17 @@
 import React from "react";
 import MovieCard from "./MovieCard";
-import useFetchMovies from "../hooks/FetchMovies";
+import { Movie } from "../types/Movies";
 
-const MovieList: React.FC = () => {
-  const { movies, loading, error } = useFetchMovies();
+interface MovieListProps {
+  movies: Movie[];
+}
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
+const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
     <div className="movie-list">
       {movies.map((movie, index) => (
         <MovieCard
-          key={index} // Använd index här eller ett unikt ID om du har ett
+          key={index} // Använd index eller unikt ID
           title={movie.title}
           thumbnail={movie.thumbnail}
           synopsis={movie.synopsis}
