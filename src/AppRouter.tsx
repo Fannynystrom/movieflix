@@ -11,7 +11,7 @@ import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
-import Categories from "./screens/Categories";
+import CategoriesScreen from "./screens/CategoriesScreen"; // Importera din nya komponent
 import TrendingCarousel from "./screens/TrendingCarousel";
 
 const ProtectedRoute: React.FC<{ component: React.FC }> = ({
@@ -42,13 +42,14 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute component={Home} />} />
-        <Route
-          path="/categories"
-          element={<ProtectedRoute component={Categories} />}
-        />
+    
         <Route
           path="/trendingcarousel"
           element={<ProtectedRoute component={TrendingCarousel} />}
+        />
+         <Route
+          path="/categoriesscreen"
+          element={<ProtectedRoute component={CategoriesScreen} />} // Använd CategoriesScreen här
         />
         <Route
           path="/bookmarked"
