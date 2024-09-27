@@ -9,7 +9,7 @@ const Navigate: React.FC = () => {
     <nav className="navbar">
       <Link to="/">Startsida</Link>
       <Link to="/trendingcarousel">Trending</Link>
-      <Link to="/categoriesscreen">Kategorier</Link> 
+
       <Link to="/bookmarked" className="bookmark-icon">
         <FaBookmark size={24} />
       </Link>
