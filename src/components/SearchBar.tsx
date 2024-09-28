@@ -33,6 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
         size={24}
         className="search-icon"
         onClick={() => setIsSearchVisible(!isSearchVisible)}
+        data-testid="search-icon" // Lagt till test-id för teständamål
       />
       <div className={`search-field ${isSearchVisible ? "active" : ""}`}>
         <input
