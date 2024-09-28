@@ -43,7 +43,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
         />
         {results.length > 0 && (
           <ul className="search-results">
-            {results.map((result, index) => (
+            {results.slice(0, 8).map((result, index) => (
               <li key={index}>
                 <Link to={`/movie/${result.title}`}>{result.title}</Link>
               </li>
