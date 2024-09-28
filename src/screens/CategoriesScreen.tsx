@@ -3,15 +3,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import useFetchMovies from "../hooks/FetchMovies";
 import MovieCard from "../components/MovieCard";
-import "../styles/CategoriesStyles.css";
 
+import "../styles/CategoriesStyles.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const CategoriesScreen: React.FC = () => {
   const { movies, loading, error } = useFetchMovies();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>("Alla kategorier");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Alla kategorier");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading movies: {error}</p>;
@@ -19,10 +19,6 @@ const CategoriesScreen: React.FC = () => {
   const genres = Array.from(
     new Set(movies.flatMap((movie) => movie.genre.split(", ").map((g) => g.trim())))
   );
-
-  const filteredMovies = selectedCategory && selectedCategory !== "Alla kategorier"
-    ? movies.filter((movie) => movie.genre.split(", ").includes(selectedCategory))
-    : movies;
 
   return (
     <div className="categories-container">
@@ -50,7 +46,7 @@ const CategoriesScreen: React.FC = () => {
         <div>
           <h2 className="selected-category-title">{selectedCategory}</h2>
           <div className="filtered-movies-grid">
-            {filteredMovies.map((movie) => (
+            {movies.filter(movie => movie.genre.split(", ").includes(selectedCategory)).map(movie => (
               <MovieCard
                 key={movie.title}
                 title={movie.title}

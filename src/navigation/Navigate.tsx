@@ -8,8 +8,9 @@ const Navigate: React.FC = () => {
   return (
     <nav className="navbar">
       <Link to="/">Startsida</Link>
+      <Link to="/categoriesscreen">Kategorier</Link> 
       <Link to="/trendingcarousel">Trending</Link>
-
+      <Link to="/recommendedcarousel">Recommended</Link>
       <Link to="/bookmarked" className="bookmark-icon">
         <FaBookmark size={24} />
       </Link>

@@ -48,11 +48,12 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
       {isAuthenticated && <Navigation />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute component={Home} />} />
+        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route
-          path="/categories"
-          element={<ProtectedRoute component={Categories} />}
+          path="/categoriesscreen"
+          element={<ProtectedRoute element={<CategoriesScreen />} />} // Använd CategoriesScreen här
         />
+     
         <Route
           path="/trendingcarousel"
           element={<ProtectedRoute element={<TrendingCarousel />} />}
@@ -65,10 +66,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
             />
           }
         />
-         <Route
-          path="/categoriesscreen"
-          element={<ProtectedRoute component={CategoriesScreen} />} // Använd CategoriesScreen här
-        />
+       
         <Route
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarkedScreen />} />}
