@@ -53,7 +53,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
           path="/categoriesscreen"
           element={<ProtectedRoute element={<CategoriesScreen />} />} // Använd CategoriesScreen här
         />
-     
+
         <Route
           path="/trendingcarousel"
           element={<ProtectedRoute element={<TrendingCarousel />} />}
@@ -66,7 +66,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
             />
           }
         />
-       
+
         <Route
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarkedScreen />} />}
