@@ -11,7 +11,7 @@ import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
-import Categories from "./screens/Categories";
+import CategoriesScreen from "./screens/CategoriesScreen"; // Importera din nya komponent
 import TrendingCarousel from "./screens/TrendingCarousel";
 import RecommendedCarousel from "./screens/RecommendedCarousel";
 import { Movie } from "../src/types/Movies";
@@ -50,9 +50,10 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route
-          path="/categories"
-          element={<ProtectedRoute element={<Categories />} />}
+          path="/categoriesscreen"
+          element={<ProtectedRoute element={<CategoriesScreen />} />} // Använd CategoriesScreen här
         />
+
         <Route
           path="/trendingcarousel"
           element={<ProtectedRoute element={<TrendingCarousel />} />}
@@ -65,6 +66,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
             />
           }
         />
+
         <Route
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarkedScreen />} />}

@@ -1,0 +1,147 @@
+.categories-container {
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(90deg, #141e30, #243b55);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kategoriknappar för alla skärmstorlekar */
+.category-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 10px 0;
+  background: linear-gradient(90deg, #141e30, #243b55);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.category-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 50px;
+  color: #333;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-button.active {
+  background-color: #1463bd;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Gridlayout för filtrerade filmer när en kategori är vald */
+.filtered-movies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tre filmer per rad */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Titel för enskilda kategorier och för rubriken "Alla kategorier" */
+.category-title,
+.selected-category-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: aliceblue;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* Swiper-sektioner för alla kategorier */
+.category-section {
+  margin-bottom: 60px;
+}
+
+.movies-slider {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-slider-item {
+  padding: 10px;
+}
+
+.carousel-container {
+  border: none;
+  margin-bottom: 0;
+}
+
+.carousel-container,
+.filtered-movies-grid {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Ipad */
+@media (max-width: 768px) {
+  .category-buttons {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .category-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 40px;
+    margin: 5px;
+  }
+
+  .category-title,
+  .selected-category-title {
+    font-size: 24px;
+    color: aliceblue;
+  }
+
+  .filtered-movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .movie-slider-item {
+    padding: 5px;
+  }
+
+  .swiper-slide {
+    width: 100px;
+  }
+}
+
+/* mobil */
+@media (max-width: 480px) {
+  .category-buttons {
+    gap: 5px;
+  }
+
+  .category-button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 30px;
+  }
+
+  .category-title,
+  .selected-category-title {
+    font-size: 20px;
+    color: aliceblue;
+  }
+
+  .filtered-movies-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .swiper-slide {
+    width: 120px;
+  }
+}
