@@ -56,13 +56,12 @@ describe("SearchBar Component", () => {
       genre: `Genre ${i + 1}`,
       actors: [`Actor ${i + 1}`],
     }));
-    
+
     render(<SearchBar data={extendedData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");
     fireEvent.change(searchInput, { target: { value: "Movie" } });
-    
+
     const listItems = screen.getAllByRole("listitem");
     expect(listItems.length).toBe(8);
   });
-  
 });
