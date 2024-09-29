@@ -1,17 +1,32 @@
 import React, { useState } from "react";
+import { signInWithEmailAndPassword, AuthError, User } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import "../styles/LoginComponent.css";
 
 interface LoginComponentProps {
-  onLogin: (username: string, password: string) => void;
+  onLoginSuccess: (user: User) => void;
 }
 
-const LoginComponent: React.FC<LoginComponentProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
+const LoginComponent: React.FC<LoginComponentProps> = ({ onLoginSuccess }) => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(username, password);
+    setError(null);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      onLoginSuccess(userCredential.user);
+    } catch (error) {
+      const authError = error as AuthError;
+      setError(authError.message);
+    }
   };
 
   return (
@@ -19,12 +34,12 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ onLogin }) => {
       <h2>Logga in</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Användarnamn</label>
+          <label htmlFor="email">E-post</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -38,6 +53,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ onLogin }) => {
             required
           />
         </div>
+        {error && <div className="error-message">{error}</div>}
         <button type="submit">Logga in</button>
       </form>
     </div>

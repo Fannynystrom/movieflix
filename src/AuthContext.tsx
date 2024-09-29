@@ -6,11 +6,14 @@ import React, {
   useCallback,
   useRef,
 } from "react";
+import { User, signOut } from "firebase/auth";
 import Cookies from "js-cookie";
+import { auth } from "../config/firebase";
 
 interface AuthContextType {
+  currentUser: User | null;
   isAuthenticated: boolean;
-  login: () => void;
+  login: (user: User) => void;
   logout: () => void;
 }
 
@@ -21,6 +24,7 @@ const INACTIVITY_TIMEOUT = 30 * 60 * 1000; // logs out after 30 minutes
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return Cookies.get("isAuthenticated") === "true";
   });
@@ -34,12 +38,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }, INACTIVITY_TIMEOUT);
   }, []);
 
-  const login = useCallback(() => setIsAuthenticated(true), []);
-  const logout = useCallback(() => setIsAuthenticated(false), []);
+  const login = useCallback((user: User) => {
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+    Cookies.set("isAuthenticated", "true");
+  }, []);
+
+  const logout = useCallback(() => {
+    signOut(auth)
+      .then(() => {
+        setCurrentUser(null);
+        setIsAuthenticated(false);
+        Cookies.remove("isAuthenticated");
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
-      Cookies.set("isAuthenticated", "true");
       resetTimer();
 
       const activityEvents = ["mousedown", "keydown", "touchstart", "scroll"];
@@ -56,13 +74,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         );
       };
     } else {
-      Cookies.remove("isAuthenticated");
       if (timerRef.current) clearTimeout(timerRef.current);
     }
   }, [isAuthenticated, resetTimer]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ currentUser, isAuthenticated, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
