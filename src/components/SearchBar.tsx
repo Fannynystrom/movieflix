@@ -3,16 +3,23 @@ import { FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
 import { Link } from "react-router-dom";
 
+interface Movie {
+  title: string;
+  synopsis: string;
+  genre: string;
+  actors: string[];
+}
+
 interface SearchBarProps {
-  data: any[];
+  data: Movie[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Movie[]>([]);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
 
-  const fuse = new Fuse(data, {
+  const fuse = new Fuse<Movie>(data, {
     keys: ["title", "synopsis", "genre", "actors"],
     threshold: 0.3,
   });
@@ -33,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
         size={24}
         className="search-icon"
         onClick={() => setIsSearchVisible(!isSearchVisible)}
-        data-testid="search-icon" // Lagt till test-id för teständamål
+        data-testid="search-icon"
       />
       <div className={`search-field ${isSearchVisible ? "active" : ""}`}>
         <input
