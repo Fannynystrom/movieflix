@@ -31,3 +31,39 @@
 .swiper-pagination-bullet-active {
   background-color: #ffcc00; /* Gul färg för den aktiva pagination-pricken */
 }
+
+/* Responsiv design */
+@media (max-width: 768px) {
+  .carousel-container {
+    /* Eventuella specifika justeringar för iPads */
+    padding: 0 20px; /* Lägga till lite padding på sidorna */
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    padding: 8px; /* Minska padding för knappar på mindre skärmar */
+    font-size: 14px; /* Minska fontstorleken om det behövs */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    /* Lägga till ytterligare padding för mobiler */
+    padding: 0 10px; /* Minska padding för ännu mindre skärmar */
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    padding: 6px; /* Ytterligare minska padding */
+    font-size: 12px; /* Minska fontstorleken för mobiler */
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px; /* Minska storleken på pagination-dots */
+    height: 10px; /* Minska storleken på pagination-dots */
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ffcc00; /* Hålla samma färg för aktiva bullets */
+  }
+}

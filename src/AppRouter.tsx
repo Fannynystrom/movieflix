@@ -15,6 +15,7 @@ import CategoriesScreen from "./screens/CategoriesScreen"; // Importera din nya 
 import TrendingCarousel from "./screens/TrendingCarousel";
 import RecommendedCarousel from "./screens/RecommendedCarousel";
 import { Movie } from "../src/types/Movies";
+import "./styles/App.css";
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
   const { isAuthenticated } = useAuth();
@@ -23,7 +24,7 @@ const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
 
 const AppRouter: React.FC = () => {
   // Sätt rätt typ på trendingMovies
-  const trendingMovies: Movie[] = []; // Här skulle du hämta filmer från din databas eller API
+  const trendingMovies: Movie[] = [];
 
   return (
     <AuthProvider>
@@ -37,7 +38,7 @@ const AppRouter: React.FC = () => {
 };
 
 interface AppContentProps {
-  trendingMovies: Movie[]; // Använd Movie-typen här
+  trendingMovies: Movie[];
 }
 
 const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
@@ -51,7 +52,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route
           path="/categoriesscreen"
-          element={<ProtectedRoute element={<CategoriesScreen />} />} // Använd CategoriesScreen här
+          element={<ProtectedRoute element={<CategoriesScreen />} />}
         />
 
         <Route
@@ -62,7 +63,7 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
           path="/recommendedcarousel"
           element={
             <ProtectedRoute
-              element={<RecommendedCarousel trendingMovies={trendingMovies} />} // Skicka props
+              element={<RecommendedCarousel trendingMovies={trendingMovies} />}
             />
           }
         />

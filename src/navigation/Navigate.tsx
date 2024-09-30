@@ -12,7 +12,7 @@ const Navigate: React.FC = () => {
     <nav className="navbar">
       <div>
         <Link to="/">Startsida</Link>
-        <Link to="/catogories">Kategorier</Link>
+        <Link to="/categoriesscreen">Kategorier</Link>
         <Link to="/trendingcarousel">Trending</Link>
         <Link to="/recommendedcarousel">Recommended</Link>
       </div>
