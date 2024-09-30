@@ -1,0 +1,19 @@
+/* app.css */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* Säkerställ att det tar upp hela viewportens bredd */
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    overflow-x: hidden; /* Förhindra horisontell scroll */
+  }
+  
+  
+  .categories-container {
+    width: 100%; /* Ta upp hela bredden */
+    min-height: 100vh; /* Se till att den tar upp hela höjden */
+  }
+  
+  /* Du kan också inkludera andra globala stilar här */
+  

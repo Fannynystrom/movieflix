@@ -3,8 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import useFetchMovies from "../hooks/FetchMovies";
 import MovieCard from "../components/MovieCard";
-
+import "../styles/MovieCard.css"; // Justera sökvägen om det behövs
 import "../styles/CategoriesStyles.css";
+import "../styles/Slider.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -77,26 +78,34 @@ const CategoriesScreen: React.FC = () => {
             <div key={genre} className="category-section">
               <h3 className="category-title">{genre}</h3>
               <Swiper
-                modules={[Navigation, Pagination, A11y]}
-                spaceBetween={30}
-                slidesPerView={4}
-                navigation
-                pagination={{ clickable: true }}
-              >
-                {genreMovies.map((movie) => (
-                  <SwiperSlide key={movie.title}>
-                    <MovieCard
-                      title={movie.title}
-                      thumbnail={movie.thumbnail || "path/to/default-image.jpg"}
-                      synopsis={movie.synopsis || "Description not available"}
-                      rating={movie.rating}
-                      genre={movie.genre}
-                      year={movie.year}
-                      actors={movie.actors || []}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+  modules={[Navigation, Pagination, A11y]}
+  spaceBetween={10} // Minska avståndet mellan korten
+  slidesPerView={2} // Visa två kort per rad
+  navigation
+  pagination={{ clickable: true }}
+  breakpoints={{
+    480: { slidesPerView: 2, spaceBetween: 10 }, // Justera för mobil
+    768: { slidesPerView: 3, spaceBetween: 20 }, // Justera för tablet
+    1024: { slidesPerView: 4, spaceBetween: 30 }, // Standard för desktop
+  }}
+>
+
+  {genreMovies.map((movie) => (
+    <SwiperSlide key={movie.title}>
+      <MovieCard
+        title={movie.title}
+        thumbnail={movie.thumbnail || "path/to/default-image.jpg"}
+        synopsis={movie.synopsis || "Description not available"}
+        rating={movie.rating}
+        genre={movie.genre}
+        year={movie.year}
+        actors={movie.actors || []}
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+
             </div>
           );
         })
