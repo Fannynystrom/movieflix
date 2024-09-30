@@ -3,35 +3,86 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
-  padding: 10px;
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;  padding: 10px;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.navbar:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Lyft-effekt vid hovring */
 }
 
 .navbar a {
-  color: white;
+  color: white; /* Fallback-färg om gradient inte fungerar */
   text-decoration: none;
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
+  position: relative;
+  background: linear-gradient(45deg, #b6dbe2, #3587a0); /* Gradientfärger */
+  -webkit-background-clip: text; /* WebKit-specifik */
+  background-clip: text; /* Standard-egenskap */
+  -webkit-text-fill-color: transparent; /* Gör texten genomskinlig så gradienten syns */
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .navbar a:hover {
-  background-color: #555;
-  border-radius: 5px;
+  background: linear-gradient(45deg, #33ccff, #ff33cc); /* Ny gradientfärg vid hovring */
+  -webkit-background-clip: text;
+  background-clip: text; /* Standard-egenskap */
+  -webkit-text-fill-color: transparent;
 }
+
+
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+  width: 100%; /* Understreck som expanderar vid hovring */
+}
+
+
 
 .bookmark-icon {
   margin-left: auto;
   z-index: 2;
   position: relative;
+  transition: transform 0.2s ease;
+}
+
+.bookmark-icon:hover {
+  transform: scale(1.2); /* Förstora ikonen vid hovring */
 }
 
 .bookmark-icon svg {
   fill: yellow;
+  transition: fill 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bookmark-icon:hover svg {
   fill: orange;
+  box-shadow: 0 0 10px orange; /* Lätt glöd vid hovring */
 }
 
 .icons {
@@ -52,6 +103,11 @@
   cursor: pointer;
   margin-right: 10px;
   z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.search-icon:active {
+  transform: rotate(360deg); /* Liten rotation vid klick */
 }
 
 .search-field {
@@ -60,7 +116,6 @@
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* background-color: white; */
   transition:
     width 0.4s ease,
     opacity 0.4s ease;
@@ -104,7 +159,7 @@
 
 /* Media Queries for responsive design */
 
-/*  768px och mindre (mobiler och iPads) */
+/* 768px och mindre (mobiler och iPads) */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: row;
