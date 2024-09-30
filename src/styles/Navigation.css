@@ -1,14 +1,15 @@
 .navbar {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;  padding: 10px;
+  animation: gradientAnimation 15s ease infinite;
+  padding: 10px;
   position: relative;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -21,166 +22,84 @@
   }
 }
 
-.navbar:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Lyft-effekt vid hovring */
+.navbar div {
+  display: flex;
+  gap: 20px; /* Avstånd mellan länkarna för större skärmar */
 }
 
 .navbar a {
-  color: white; /* Fallback-färg om gradient inte fungerar */
+  color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
   font-size: 1.2rem;
   position: relative;
-  background: linear-gradient(45deg, #b6dbe2, #3587a0); /* Gradientfärger */
-  -webkit-background-clip: text; /* WebKit-specifik */
-  background-clip: text; /* Standard-egenskap */
-  -webkit-text-fill-color: transparent; /* Gör texten genomskinlig så gradienten syns */
-  transition: background 0.3s ease, color 0.3s ease;
+  background: linear-gradient(45deg, #b6dbe2, #3587a0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar a:hover {
-  background: linear-gradient(45deg, #33ccff, #ff33cc); /* Ny gradientfärg vid hovring */
-  -webkit-background-clip: text;
-  background-clip: text; /* Standard-egenskap */
-  -webkit-text-fill-color: transparent;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-
-
-.navbar a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #fff;
-  transition: width 0.3s ease;
-}
-
-.navbar a:hover::after {
-  width: 100%; /* Understreck som expanderar vid hovring */
-}
-
-
 
 .bookmark-icon {
-  margin-left: auto;
-  z-index: 2;
-  position: relative;
-  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  color: yellow;
+  transition: transform 0.2s ease, fill 0.2s ease;
 }
 
 .bookmark-icon:hover {
-  transform: scale(1.2); /* Förstora ikonen vid hovring */
+  transform: scale(1.2);
+  color: orange;
 }
 
-.bookmark-icon svg {
-  fill: yellow;
-  transition: fill 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bookmark-icon:hover svg {
-  fill: orange;
-  box-shadow: 0 0 10px orange; /* Lätt glöd vid hovring */
-}
-
-.icons {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  position: relative;
-  z-index: 2;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.search-icon {
-  cursor: pointer;
-  margin-right: 10px;
-  z-index: 2;
-  transition: transform 0.4s ease;
-}
-
-.search-icon:active {
-  transform: rotate(360deg); /* Liten rotation vid klick */
-}
-
-.search-field {
-  width: 0;
-  opacity: 0;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition:
-    width 0.4s ease,
-    opacity 0.4s ease;
-  position: absolute;
-  right: 45px;
-  z-index: 1;
-}
-
-.search-field.active {
-  width: 200px;
-  opacity: 1;
-}
-
-.search-results {
-  position: absolute;
-  top: 40px;
-  width: 200px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  z-index: 2;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.search-results li {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-}
-
-.search-results li:hover {
-  background-color: #f1f1f1;
-}
-
-.search-results li a {
-  text-decoration: none;
-  color: black;
-}
-
-/* Media Queries for responsive design */
-
-/* 768px och mindre (mobiler och iPads) */
+/* Responsiv design för mobiler och mindre skärmar */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: row;
-    padding: 0.5rem;
+    justify-content: space-between;
+    padding: 2px;
+  }
+
+  .navbar div {
+    gap: 10px; /* Minska gapet mellan länkarna */
   }
 
   .navbar a {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+    font-size: 1rem; /* Minska textstorlek för mobil */
+    padding: 0.5rem; /* Minska padding för att få plats */
   }
 
   .bookmark-icon {
-    margin-top: 0.5rem;
-    margin-left: auto;
+    margin-left: 0; /* Justera marginalen */
+  }
+
+  .icons {
+    gap: 5px; /* Minska gapet mellan sökfältet och bokmärkesikonen */
   }
 }
 
-/* För större iPads och mindre laptops (upp till 1024px) */
+/* Responsiv design för iPads och mindre laptops */
 @media (max-width: 1024px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  .navbar div {
+    gap: 15px; /* Minska gapet mellan länkarna */
+  }
+
   .navbar a {
-    padding: 0.5rem 1rem;
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Justera textstorleken för iPad */
+    padding: 0.5rem; /* Minska padding */
+  }
+
+  .icons {
+    gap: 10px; /* Minska gapet mellan sökfält och bokmärkesikon */
   }
 }
