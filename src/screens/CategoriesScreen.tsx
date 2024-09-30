@@ -5,7 +5,7 @@ import useFetchMovies from "../hooks/FetchMovies";
 import MovieCard from "../components/MovieCard";
 import "../styles/MovieCard.css"; // Justera sökvägen om det behövs
 import "../styles/CategoriesStyles.css";
-import "../styles/Slider.css";
+import "../styles/slider.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
