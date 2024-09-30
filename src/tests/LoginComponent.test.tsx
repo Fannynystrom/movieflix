@@ -1,35 +1,39 @@
-import "@testing-library/jest-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import LoginComponent from "../../src/components/LoginComponent";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+jest.mock("firebase/auth", () => ({
+  signInWithEmailAndPassword: jest.fn(),
+}));
 
 describe("LoginComponent", () => {
   // Test 1: Kontrollera att alla delar av formuläret visas
   test("visar alla delar av inloggningsformuläret", () => {
-    render(<LoginComponent onLogin={() => {}} />);
-    expect(screen.getByLabelText("Användarnamn")).toBeInTheDocument();
+    render(<LoginComponent onLoginSuccess={() => {}} />);
+    expect(screen.getByLabelText("E-post")).toBeInTheDocument();
     expect(screen.getByLabelText("Lösenord")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "Logga in" }),
     ).toBeInTheDocument();
   });
 
-  // Test 2: Kontrollera att användarnamn kan skrivas in
-  test("låter användaren skriva in användarnamn", () => {
-    render(<LoginComponent onLogin={() => {}} />);
-    const användarnamnsInput = screen.getByLabelText("Användarnamn");
+  // Test 2: Kontrollera att epost kan skrivas in
+  test("låter användaren skriva in e-post", () => {
+    render(<LoginComponent onLoginSuccess={() => {}} />);
+    const epostInput = screen.getByLabelText("E-post");
 
-    // Simulera att användaren skriver in ett användarnamn
-    fireEvent.change(användarnamnsInput, {
-      target: { value: "testanvändare" },
+    // Simulera att användaren skriver in epost
+    fireEvent.change(epostInput, {
+      target: { value: "test@test.com" },
     });
 
     // Kontrollera att värdet har uppdaterats
-    expect(användarnamnsInput).toHaveValue("testanvändare");
+    expect(epostInput).toHaveValue("test@test.com");
   });
 
   // Test 3: Kontrollera att lösenord kan skrivas in
   test("låter användaren skriva in lösenord", () => {
-    render(<LoginComponent onLogin={() => {}} />);
+    render(<LoginComponent onLoginSuccess={() => {}} />);
     const lösenordsInput = screen.getByLabelText("Lösenord");
 
     // Simulera att användaren skriver in ett lösenord
@@ -40,13 +44,18 @@ describe("LoginComponent", () => {
   });
 
   // Test 4: Kontrollera att inloggningsfunktionen anropas med rätt värden
-  test("skickar inloggningsuppgifter när formuläret skickas", () => {
-    const mockOnLogin = jest.fn();
-    render(<LoginComponent onLogin={mockOnLogin} />);
+  test("skickar inloggningsuppgifter när formuläret skickas", async () => {
+    const mockUser = { uid: "123", email: "test@example.com" };
+    (signInWithEmailAndPassword as jest.Mock).mockResolvedValue({
+      user: mockUser,
+    });
+
+    const onLoginSuccess = jest.fn();
+    render(<LoginComponent onLoginSuccess={onLoginSuccess} />);
 
     // Simulera att användaren fyller i formuläret och klickar på "Logga in"
-    fireEvent.change(screen.getByLabelText("Användarnamn"), {
-      target: { value: "testanvändare" },
+    fireEvent.change(screen.getByLabelText("E-post"), {
+      target: { value: "test@test.com" },
     });
     fireEvent.change(screen.getByLabelText("Lösenord"), {
       target: { value: "hemligt123" },
@@ -54,15 +63,17 @@ describe("LoginComponent", () => {
     fireEvent.click(screen.getByRole("button", { name: "Logga in" }));
 
     // Kontrollera att inloggningsfunktionen anropades med rätt värden
-    expect(mockOnLogin).toHaveBeenCalledWith("testanvändare", "hemligt123");
+    await waitFor(() => {
+      expect(onLoginSuccess).toHaveBeenCalledWith(mockUser);
+    });
   });
 
   // Test 5: Kontrollera att fälten är obligatoriska
-  test("kräver att användarnamn och lösenord fylls i", () => {
-    render(<LoginComponent onLogin={() => {}} />);
+  test("kräver att e-post och lösenord fylls i", () => {
+    render(<LoginComponent onLoginSuccess={() => {}} />);
 
-    // Kontrollera att både användarnamn och lösenord är obligatoriska fält
-    expect(screen.getByLabelText("Användarnamn")).toBeRequired();
+    // Kontrollera att både E-post och lösenord är obligatoriska fält
+    expect(screen.getByLabelText("E-post")).toBeRequired();
     expect(screen.getByLabelText("Lösenord")).toBeRequired();
   });
 });
