@@ -3,7 +3,9 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Fördela utrymmet mellan elementen */
@@ -16,8 +18,8 @@
 
 .movie-card img {
   width: 100%;
-  height: 340px; 
-  object-fit: cover; 
+  height: 340px;
+  object-fit: cover;
 }
 
 .movie-card h3 {
@@ -25,10 +27,10 @@
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
-  margin: 4px 0; 
+  margin: 4px 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 .movie-card p {
@@ -37,7 +39,7 @@
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 .movie-card-actions {
@@ -48,25 +50,26 @@
 }
 
 .movie-card-actions button {
-  flex: 1; 
+  flex: 1;
   margin: 0 5px;
 }
 
-
-
 .movie-card-actions button {
-  background-color: transparent; 
-  color: #e0e0e0; 
-  border: 1px solid #e0e0e0; 
+  background-color: transparent;
+  color: #e0e0e0;
+  border: 1px solid #e0e0e0;
   padding: 6px 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.9rem; 
-  transition: background-color 0.2s, color 0.2s, border 0.2s;
+  font-size: 0.9rem;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border 0.2s;
 }
 
 .movie-card-actions button:hover {
-  background-color: #e50914; 
+  background-color: #e50914;
   color: #ffffff;
   border: 1px solid #e50914;
 }
@@ -80,12 +83,12 @@
 }
 
 .movie-card .bookmark-button svg {
-  color: #ffcc00; 
+  color: #ffcc00;
   font-size: 24px;
 }
 
 .movie-card .bookmark-button svg:hover {
-  color: #ffaa00; 
+  color: #ffaa00;
 }
 
 /* Dropdown button */
@@ -100,12 +103,12 @@
 }
 
 .dropdown-button:hover {
-  color: #e50914; 
+  color: #e50914;
 }
 
 /* Dropdown content */
 .movie-card-details {
-  background-color: #1e1e1e; 
+  background-color: #1e1e1e;
   padding: 16px;
   width: 100%;
   text-align: left;
@@ -138,7 +141,7 @@
   }
 
   .movie-card h3 {
-    font-size: 1.0rem; /* Mindre textstorlek för mobil */
+    font-size: 1rem; /* Mindre textstorlek för mobil */
     margin: 8px 0;
     white-space: nowrap;
     overflow: hidden;

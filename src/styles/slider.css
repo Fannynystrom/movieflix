@@ -57,12 +57,12 @@
     padding: 6px; /* Ytterligare minska padding */
     font-size: 12px; /* Minska fontstorleken för mobiler */
   }
-  
+
   .swiper-pagination-bullet {
     width: 10px; /* Minska storleken på pagination-dots */
     height: 10px; /* Minska storleken på pagination-dots */
   }
-  
+
   .swiper-pagination-bullet-active {
     background-color: #ffcc00; /* Hålla samma färg för aktiva bullets */
   }

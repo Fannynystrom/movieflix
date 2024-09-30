@@ -28,7 +28,9 @@
   border-radius: 50px;
   color: #333;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,9 +44,12 @@
 /* Gridlayout för filtrerade filmer */
 .filtered-movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Filmerna anpassas automatiskt */
-  gap: 16px; 
-  justify-items: start; 
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Filmerna anpassas automatiskt */
+  gap: 16px;
+  justify-items: start;
 }
 
 /* Titel för enskilda kategorier och för rubriken "Alla kategorier" */
@@ -65,44 +70,41 @@
 /* Ipad */
 @media (max-width: 768px) {
   .filtered-movies-grid {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .category-button {
-    padding: 10px 15px; 
-    font-size: 14px; 
+    padding: 10px 15px;
+    font-size: 14px;
   }
 
   .category-title,
   .selected-category-title {
-    font-size: 24px; 
+    font-size: 24px;
   }
 
   .swiper {
-    padding: 10px; 
+    padding: 10px;
   }
 
   .swiper-slide {
-    width: auto; 
+    width: auto;
   }
 }
-
 
 /* mobil*/
 @media (max-width: 480px) {
   .categories-container {
     padding-left: 5px;
   }
-    .filtered-movies-grid {
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 16px;
-    }
-  
-    .movie-card {
-      height: 400px; 
-    }
-  
-  
+  .filtered-movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .movie-card {
+    height: 400px;
+  }
 
   .movie-card img {
     height: 200px;
@@ -110,13 +112,12 @@
 
   .movie-card-actions {
     flex-direction: row;
-    justify-content: space-around; 
+    justify-content: space-around;
   }
 
   .category-title,
-.selected-category-title { 
-  margin-left: 0px;
-  margin-right: 5px;
-}
-
+  .selected-category-title {
+    margin-left: 0px;
+    margin-right: 5px;
+  }
 }
