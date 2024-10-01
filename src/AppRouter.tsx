@@ -10,10 +10,8 @@ import { BookmarksProvider } from "./context/BookmarksContext";
 import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
-import CategoriesScreen from "./screens/CategoriesScreen"; // Importera din nya komponent
-import TrendingCarousel from "./screens/TrendingCarousel";
-import RecommendedCarousel from "./screens/RecommendedCarousel";
-import { Movie } from "../src/types/Movies";
+import CategoriesScreen from "./screens/CategoriesScreen";
+import MovieFlixScreen from "./screens/MovieFlixScreen";
 import "./styles/App.css";
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
@@ -22,25 +20,18 @@ const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
 };
 
 const AppRouter: React.FC = () => {
-  // Sätt rätt typ på trendingMovies
-  const trendingMovies: Movie[] = [];
-
   return (
     <AuthProvider>
       <BookmarksProvider>
         <Router>
-          <AppContent trendingMovies={trendingMovies} />
+          <AppContent />
         </Router>
       </BookmarksProvider>
     </AuthProvider>
   );
 };
 
-interface AppContentProps {
-  trendingMovies: Movie[];
-}
-
-const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
+const AppContent: React.FC = () => {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -48,29 +39,14 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
       {isAuthenticated && <Navigation />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        {/* Ändra standardsidan "/" till TrendingCarousel */}
         <Route
           path="/"
-          element={<ProtectedRoute element={<TrendingCarousel />} />}
+          element={<ProtectedRoute element={<MovieFlixScreen />} />}
         />
         <Route
           path="/categoriesscreen"
           element={<ProtectedRoute element={<CategoriesScreen />} />}
         />
-
-        <Route
-          path="/trendingcarousel"
-          element={<ProtectedRoute element={<TrendingCarousel />} />}
-        />
-        <Route
-          path="/recommendedcarousel"
-          element={
-            <ProtectedRoute
-              element={<RecommendedCarousel trendingMovies={trendingMovies} />}
-            />
-          }
-        />
-
         <Route
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarkedScreen />} />}
