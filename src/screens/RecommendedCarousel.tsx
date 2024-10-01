@@ -13,22 +13,23 @@ interface RecommendedCarouselProps {
   movies: Movie[];
 }
 
-const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({ movies }) => {
+const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
+  movies,
+}) => {
   return (
     <div className="carousel-container">
-<Swiper
-  modules={[Navigation, Pagination, A11y]}
-  spaceBetween={10}
-  slidesPerView={4} // Standardvärde för desktop
-  navigation
-  pagination={{ clickable: true }}
-  breakpoints={{
-    480: { slidesPerView: 3 }, // Visa 3 slides per vy på mobiler
-    768: { slidesPerView: 4 }, // Visa 4 slides per vy på tablets
-    // Lägg till fler breakpoints vid behov
-  }}
->
-
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        spaceBetween={10}
+        slidesPerView={4} // Standardvärde för desktop
+        navigation
+        pagination={{ clickable: true }}
+        breakpoints={{
+          480: { slidesPerView: 3 }, // Visa 3 slides per vy på mobiler
+          768: { slidesPerView: 4 }, // Visa 4 slides per vy på tablets
+          // Lägg till fler breakpoints vid behov
+        }}
+      >
         {movies.map((movie, index) => (
           <SwiperSlide key={index}>
             <MovieCard {...movie} />
