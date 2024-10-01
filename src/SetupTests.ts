@@ -1,3 +1,3 @@
 import "@testing-library/jest-dom";
-
-jest.mock("../config/firebase", () => ({}));
+import { vi } from "vitest";
+vi.mock("../config/firebase", () => ({}));
