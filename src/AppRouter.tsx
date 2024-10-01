@@ -9,7 +9,6 @@ import { AuthProvider, useAuth } from "./AuthContext";
 import { BookmarksProvider } from "./context/BookmarksContext";
 import Navigation from "./navigation/Navigate";
 import Login from "./screens/Login";
-import Home from "./screens/Home";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
 import CategoriesScreen from "./screens/CategoriesScreen"; // Importera din nya komponent
 import TrendingCarousel from "./screens/TrendingCarousel";
@@ -49,7 +48,11 @@ const AppContent: React.FC<AppContentProps> = ({ trendingMovies }) => {
       {isAuthenticated && <Navigation />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
+        {/* Ändra standardsidan "/" till TrendingCarousel */}
+        <Route
+          path="/"
+          element={<ProtectedRoute element={<TrendingCarousel />} />}
+        />
         <Route
           path="/categoriesscreen"
           element={<ProtectedRoute element={<CategoriesScreen />} />}
