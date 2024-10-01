@@ -1,16 +1,14 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import MovieCard from "../components/MovieCard";
 import BookMarkedScreen from "../screens/BookmarkedScreen";
-import { useBookmarks } from "../context/BookmarksContext"; // mockar denna hook
+import { useBookmarks } from "../context/BookmarksContext"; // Mockar denna hook
 import "@testing-library/jest-dom"; // För jest-dom matchers
+import { describe, it, vi, expect, Mock } from "vitest"; // Importera alla Vitest-funktioner
+import { Movie } from "../types/Movies"; // Importera Movie-typen
 
-// ersätter useBookmarks-hooken med mockad data från context
-jest.mock("../context/BookmarksContext", () => ({
-  useBookmarks: jest.fn(),
-}));
-
-// mockar två filmer med bokmärken
-const mockBookmarks = [
+// Mockar två filmer med Movie-typen
+const mockBookmarks: Movie[] = [
   {
     title: "Film 1",
     thumbnail: "thumbnail1.jpg",
@@ -31,8 +29,8 @@ const mockBookmarks = [
   },
 ];
 
-// mockar en film för att testa borttagning och tillägg
-const mockMovie = {
+// Mockar en enskild film för att testa borttagning och tillägg
+const mockMovie: Movie = {
   title: "Film 1",
   thumbnail: "thumbnail1.jpg",
   synopsis: "Synopsis för Film 1",
@@ -42,130 +40,121 @@ const mockMovie = {
   actors: ["Skådespelare 1", "Skådespelare 2"],
 };
 
-// Test 1: Visa meddelande när det inte finns några bokmärkta filmer
-test("visar meddelande när det inte finns några bokmärkta filmer", () => {
-  // mockar att inga bokmärken finns
-  (useBookmarks as jest.Mock).mockReturnValue({
-    bookmarks: [],
-    addBookmark: jest.fn(),
-    removeBookmark: jest.fn(),
-    isBookmarked: jest.fn(),
+vi.mock("../context/BookmarksContext", () => ({
+  useBookmarks: vi.fn(),
+}));
+
+describe("BookMarkedScreen Component Tests", () => {
+  // Test 1: Visa meddelande när det inte finns några bokmärkta filmer
+  it("visar meddelande när det inte finns några bokmärkta filmer", () => {
+    (useBookmarks as Mock).mockReturnValue({
+      bookmarks: [],
+      addBookmark: vi.fn(),
+      removeBookmark: vi.fn(),
+      isBookmarked: vi.fn(),
+    });
+
+    render(<BookMarkedScreen />);
+
+    const noBookmarksMessage = screen.getByText(
+      /du har inga bokmärkta filmer/i,
+    );
+    expect(noBookmarksMessage).toBeInTheDocument();
   });
 
-  render(<BookMarkedScreen />);
+  // Test 2: Visar bokmärken när de finns
+  it("visar bokmärken när de finns", () => {
+    (useBookmarks as Mock).mockReturnValue({
+      bookmarks: mockBookmarks,
+      addBookmark: vi.fn(),
+      removeBookmark: vi.fn(),
+      isBookmarked: vi.fn(),
+    });
 
-  // kollar så att meddelandet syns om ej några bokmärken finns
-  const noBookmarksMessage = screen.getByText(/du har inga bokmärkta filmer/i);
-  expect(noBookmarksMessage).toBeInTheDocument();
-});
+    render(<BookMarkedScreen />);
 
-// Test 2: testar de två mockade bokmärkerna
-test("visar bokmärken när de finns", () => {
-  (useBookmarks as jest.Mock).mockReturnValue({
-    bookmarks: mockBookmarks,
-    addBookmark: jest.fn(),
-    removeBookmark: jest.fn(),
-    isBookmarked: jest.fn(),
+    const movie1 = screen.getByText(/film 1/i);
+    const movie2 = screen.getByText(/film 2/i);
+
+    expect(movie1).toBeInTheDocument();
+    expect(movie2).toBeInTheDocument();
   });
 
-  render(<BookMarkedScreen />);
+  // Test 3: Lägg till ett bokmärke och uppdatera localStorage
+  it("lägger till ett bokmärke och uppdaterar localStorage", async () => {
+    const user = userEvent.setup();
 
-  // kollar att båda filmerna renderar bokmärke
-  const movie1 = screen.getByText(/film 1/i);
-  const movie2 = screen.getByText(/film 2/i);
+    const mockAddBookmark = vi.fn((movie: Movie) => {
+      localStorage.setItem("bookmarks", JSON.stringify([movie]));
+    });
+    const mockRemoveBookmark = vi.fn();
+    const mockIsBookmarked = vi.fn().mockReturnValue(false);
 
-  expect(movie1).toBeInTheDocument();
-  expect(movie2).toBeInTheDocument();
-});
+    const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
 
-// Test 3: testar att lägga till ett bokmärke och uppdatera localStorage
-test("lägger till ett bokmärke och uppdaterar localStorage", () => {
-  const mockAddBookmark = jest.fn((movie) => {
-    localStorage.setItem("bookmarks", JSON.stringify([movie]));
-  });
-  const mockRemoveBookmark = jest.fn();
-  const mockIsBookmarked = jest.fn().mockReturnValue(false);
+    (useBookmarks as Mock).mockReturnValue({
+      bookmarks: [],
+      addBookmark: mockAddBookmark,
+      removeBookmark: mockRemoveBookmark,
+      isBookmarked: mockIsBookmarked,
+    });
 
-  // Mocka localStorage.setItem
-  const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
+    const { container, rerender } = render(<MovieCard {...mockMovie} />);
 
-  // mockar useBookmarks
-  (useBookmarks as jest.Mock).mockReturnValue({
-    bookmarks: [],
-    addBookmark: mockAddBookmark,
-    removeBookmark: mockRemoveBookmark,
-    isBookmarked: mockIsBookmarked,
-  });
+    expect(mockIsBookmarked(mockMovie.title)).toBe(false);
 
-  const { container, rerender } = render(<MovieCard {...mockMovie} />);
+    const bookmarkButton = container.querySelector(".bookmark-button");
+    expect(bookmarkButton).toBeInTheDocument();
 
-  // kollar att filmen inte är bokmärkt innan vi lägger till den
-  expect(mockIsBookmarked(mockMovie.title)).toBe(false);
+    await user.click(bookmarkButton!);
 
-  // hitta knappen med querySelector
-  const bookmarkButton = container.querySelector(".bookmark-button");
-  expect(bookmarkButton).toBeInTheDocument();
+    expect(mockAddBookmark).toHaveBeenCalledWith(mockMovie);
 
-  fireEvent.click(bookmarkButton!);
+    expect(setItemSpy).toHaveBeenCalledWith(
+      "bookmarks",
+      JSON.stringify([mockMovie]),
+    );
 
-  expect(mockAddBookmark).toHaveBeenCalledWith(mockMovie);
-
-  // kollar att localStorage har uppdaterats med den nya filmen
-  expect(setItemSpy).toHaveBeenCalledWith(
-    "bookmarks",
-    JSON.stringify([mockMovie]),
-  );
-
-  // uppdaterar mock - simulerar att bokmärke lagts till
-  mockIsBookmarked.mockReturnValue(true);
-
-  // simulerar att listan har uppdaterats
-  rerender(<MovieCard {...mockMovie} />);
-
-  expect(mockIsBookmarked(mockMovie.title)).toBe(true);
-});
-
-// Test 4: testar att ta bort ett bokmärke och uppdatera localStorage
-test("tar bort ett bokmärke och uppdaterar localStorage", () => {
-  const mockAddBookmark = jest.fn();
-  const mockRemoveBookmark = jest.fn(() => {
-    localStorage.setItem("bookmarks", JSON.stringify([]));
+    mockIsBookmarked.mockReturnValue(true);
+    rerender(<MovieCard {...mockMovie} />);
+    expect(mockIsBookmarked(mockMovie.title)).toBe(true);
   });
 
-  const mockIsBookmarked = jest.fn().mockReturnValue(true);
+  // Test 4: Ta bort ett bokmärke och uppdatera localStorage
+  it("tar bort ett bokmärke och uppdaterar localStorage", async () => {
+    const user = userEvent.setup();
 
-  // mockar localStorage.setItem
-  const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
+    const mockAddBookmark = vi.fn();
+    const mockRemoveBookmark = vi.fn(() => {
+      localStorage.setItem("bookmarks", JSON.stringify([]));
+    });
 
-  // mockar useBookmarks
-  (useBookmarks as jest.Mock).mockReturnValue({
-    bookmarks: [mockMovie],
-    addBookmark: mockAddBookmark,
-    removeBookmark: mockRemoveBookmark,
-    isBookmarked: mockIsBookmarked,
+    const mockIsBookmarked = vi.fn().mockReturnValue(true);
+
+    const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
+
+    (useBookmarks as Mock).mockReturnValue({
+      bookmarks: [mockMovie],
+      addBookmark: mockAddBookmark,
+      removeBookmark: mockRemoveBookmark,
+      isBookmarked: mockIsBookmarked,
+    });
+
+    const { container, rerender } = render(<MovieCard {...mockMovie} />);
+
+    expect(mockIsBookmarked(mockMovie.title)).toBe(true);
+
+    const bookmarkButton = container.querySelector(".bookmark-button");
+    expect(bookmarkButton).toBeInTheDocument();
+
+    await user.click(bookmarkButton!);
+
+    expect(mockRemoveBookmark).toHaveBeenCalledWith(mockMovie.title);
+
+    expect(setItemSpy).toHaveBeenCalledWith("bookmarks", JSON.stringify([]));
+
+    mockIsBookmarked.mockReturnValue(false);
+    rerender(<MovieCard {...mockMovie} />);
+    expect(mockIsBookmarked(mockMovie.title)).toBe(false);
   });
-
-  const { container, rerender } = render(<MovieCard {...mockMovie} />);
-
-  // kollar att filmen är bokmärkt innan vi tar bort den
-  expect(mockIsBookmarked(mockMovie.title)).toBe(true);
-
-  // hitta knappen med querySelector
-  const bookmarkButton = container.querySelector(".bookmark-button");
-  expect(bookmarkButton).toBeInTheDocument();
-
-  fireEvent.click(bookmarkButton!);
-
-  expect(mockRemoveBookmark).toHaveBeenCalledWith(mockMovie.title);
-
-  // kollar att localStorage har uppdaterats
-  expect(setItemSpy).toHaveBeenCalledWith("bookmarks", JSON.stringify([]));
-
-  // uppdaterar mock
-  mockIsBookmarked.mockReturnValue(false);
-
-  // renderar om komponenten för att simulera att listan har uppdaterats
-  rerender(<MovieCard {...mockMovie} />);
-
-  expect(mockIsBookmarked(mockMovie.title)).toBe(false);
 });
