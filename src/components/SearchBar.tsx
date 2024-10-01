@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
 import { Link } from "react-router-dom";
+//Test för autodeploy
 
 interface Movie {
   title: string;
