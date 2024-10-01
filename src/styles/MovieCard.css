@@ -127,18 +127,15 @@
 /* Responsiv design för mobiler och iPads */
 @media (max-width: 480px) {
   .movie-card {
-    height: 400px; /* Sätt en fast höjd för mobil */
-    max-width: 100%; /* Se till att korten tar upp hela bredden på mobilen */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Fördela innehållet jämnt */
-    margin: 8px; /* Mindre marginaler för mobil */
+    height: auto; /* Låt höjden anpassas efter innehållet */
+    margin: 8px;
   }
 
   .movie-card img {
-    height: 50%; /* Gör att bilden tar upp 50% av kortets höjd */
+    height: auto;
     object-fit: cover;
   }
+
 
   .movie-card h3 {
     font-size: 1rem; /* Mindre textstorlek för mobil */
@@ -169,5 +166,11 @@
   .movie-card-actions button {
     flex: 1; /* Se till att knapparna tar lika mycket plats */
     margin: 0 5px; /* Avstånd mellan knapparna */
+  }
+
+  .swiper-slide {
+    width: auto !important;
+    display: flex;
+    justify-content: center;
   }
 }
