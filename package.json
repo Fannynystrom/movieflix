@@ -11,8 +11,7 @@
     "format": "prettier . --check",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "test": "jest",
-    "test:vitest": "vitest"
+    "test": "vitest"
   },
   "dependencies": {
     "@types/js-cookie": "^3.0.6",
