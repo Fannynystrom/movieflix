@@ -6,7 +6,11 @@ body {
   width: 100vw; /* Säkerställ att det tar upp hela viewportens bredd */
   height: 100%;
   font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, #141e30, #243b55); /* Din specifika blåa gradient */
+  background: linear-gradient(
+    90deg,
+    #141e30,
+    #243b55
+  ); /* Din specifika blåa gradient */
   overflow-x: hidden; /* Förhindra horisontell scroll */
 }
 
