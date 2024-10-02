@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/MovieCard.css';
 import { Movie } from '../types/Movies';
-import { FaHeart, FaEllipsisH, FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { FaHeart, FaPlay, FaBookmark, FaRegBookmark } from 'react-icons/fa'; 
 import { useBookmarks } from '../context/BookmarksContext';
 
 interface MovieCardProps extends Movie {
@@ -36,12 +36,19 @@ const MovieCard: React.FC<MovieCardProps> = ({
     <div className="movie-card" onClick={onClick}>
       <img src={thumbnail} alt={title} />
       <h3>{title}</h3>
+
+     
+      <div className="movie-info">
+        <p><strong>Age Rating:</strong> {rating}</p> 
+        <p><strong>Year:</strong> {year}</p> 
+      </div>
+
       <div className="movie-card-actions">
         <button className="heart-button">
           <FaHeart />
         </button>
-        <button className="ellipsis-button">
-          <FaEllipsisH />
+        <button className="play-button"> 
+          <FaPlay />
         </button>
         <button className="bookmark-button" onClick={handleBookmarkClick}>
           {isBookmarkedMovie ? <FaBookmark /> : <FaRegBookmark />}
