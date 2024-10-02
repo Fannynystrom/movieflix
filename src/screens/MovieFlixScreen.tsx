@@ -5,6 +5,9 @@ import useFetchMovies from '../hooks/FetchMovies';
 import { Movie } from '../types/Movies';
 import MovieModal from '../components/MovieModal';
 import '../styles/MovieFlixStyles.css';
+import '../styles/slider.css';
+
+
 
 const MovieFlixScreen: React.FC = () => {
   const { movies, loading, error } = useFetchMovies();

@@ -12,6 +12,7 @@
   max-width: 300px;
   margin: 16px;
   height: 500px;
+  margin-bottom: 35px;
 }
 
 .movie-card img {
@@ -100,8 +101,10 @@
 /* Responsiv design för mobiler och iPads */
 @media (max-width: 480px) {
   .movie-card {
-    height: auto;
+    min-height: 500px; /* Se till att alla kort har minst denna höjd */
+    max-height: 500px; /* Begränsa höjden så alla kort blir lika höga */
     margin: 8px;
+    margin-bottom: 30px;
   }
 
   .movie-card img {
@@ -123,7 +126,9 @@
     max-width: 350px; 
     height: auto;
   }
+}
+
 
  
 
-}
+

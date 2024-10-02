@@ -23,14 +23,29 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Swiper pagination dots */
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+.swiper-pagination {
+  position: absolute;
+  bottom: -50px; /* Försök med små negativa värden för att flytta prickarna nedåt */
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10; /* Säkerställ att paginationen visas framför annat innehåll */
+}
+
+
 .swiper-pagination-bullet {
-  background-color: white;
+  background-color: #ffffff; /* Färg på prickarna */
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffcc00; /* Gul färg för den aktiva pagination-pricken */
+  background-color: #ffcc00; /* Färg på den aktiva pricken */
 }
+
+
+
 
 /* Anpassa movie cards för mobiler och surfplattor */
 @media (max-width: 768px) {
