@@ -10,6 +10,8 @@ interface Movie {
   thumbnail: string;
   year: number;
   actors: string[];
+  ageRating?: string; // Nytt fält för åldersgräns, som är valfritt
+
 }
 
 interface FirebaseMovieData {
@@ -21,6 +23,8 @@ interface FirebaseMovieData {
     thumbnail: string;
     year: number;
     actors?: string[];
+    ageRating?: string; // Lägg till åldersgräns här också
+
   };
 }
 
@@ -49,6 +53,8 @@ const useFetchMovies = (randomize: boolean = false): UseFetchMoviesResult => {
           thumbnail: data[key].thumbnail,
           year: data[key].year,
           actors: data[key].actors || [],
+          ageRating: data[key].ageRating || 'Ej specificerad', // Hantera åldersgränsen
+
         }));
 
         if (randomize) {

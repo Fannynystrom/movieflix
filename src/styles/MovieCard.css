@@ -3,17 +3,15 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition:
-    transform 0.3s ease-in-out,
-    box-shadow 0.3s;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Fördela utrymmet mellan elementen */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 300px;
   margin: 16px;
-  height: 500px; /* Samma höjd på alla kort */
+  height: 500px;
 }
 
 .movie-card img {
@@ -28,148 +26,93 @@
   font-weight: 600;
   text-align: center;
   margin: 4px 0;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.movie-card p {
-  color: #b0b0b0;
-  font-size: 0.9rem;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .movie-card-actions {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Sprider ut ikonerna */
   width: 100%;
-  padding: 10px 0;
+  padding: 10px;
 }
 
-.movie-card-actions button {
-  flex: 1;
-  margin: 0 5px;
-}
-
+/* Stil för knapparna */
 .movie-card-actions button {
   background-color: transparent;
-  color: #e0e0e0;
-  border: 1px solid #e0e0e0;
-  padding: 6px 10px;
-  border-radius: 5px;
+  border: 1px solid #e0e0e0; /* Lägg till border runt varje knapp */
+  border-radius: 5px; /* Rundade hörn på knapparna */
   cursor: pointer;
-  font-size: 0.9rem;
-  transition:
-    background-color 0.2s,
-    color 0.2s,
-    border 0.2s;
+  font-size: 1.5rem; /* Standardstorlek på ikonerna */
+  color: #e0e0e0;
+  padding: 6px 10px;
+  transition: background-color 0.2s, color 0.2s, border 0.2s;
 }
 
+/* Hover-effekt för knapparna */
 .movie-card-actions button:hover {
   background-color: #e50914;
   color: #ffffff;
   border: 1px solid #e50914;
 }
 
-/* Bokmärke-knapp */
-.movie-card .bookmark-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  border: 1px solid #e0e0e0;
+/* Specifik stil för hjärtikonen */
+.movie-card-actions .heart-button svg {
+  color: #ff0000; /* Gör hjärtat rött */
+  font-size: 1.5rem; /* Gör hjärtat större */
 }
 
-.movie-card .bookmark-button svg {
-  color: #ffcc00;
-  font-size: 24px;
+/* Specifik stil för bokmärkesikonen */
+.movie-card-actions .bookmark-button svg {
+  color: #ffcc00; /* Guldaktig färg */
+  font-size: 1.5rem;
 }
 
-.movie-card .bookmark-button svg:hover {
-  color: #ffaa00;
-}
-
-/* Dropdown button */
-.dropdown-button {
-  background-color: transparent;
-  border: none;
+/* Specifik stil för ellipsis-ikonen */
+.movie-card-actions .ellipsis-button svg {
   color: #e0e0e0;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 1rem;
-  transition: color 0.2s;
+  font-size: 1.5rem;
 }
 
-.dropdown-button:hover {
-  color: #e50914;
+/* Justera positionen av ikonerna */
+.movie-card-actions .heart-button {
+  margin-left: 10px;
 }
 
-/* Dropdown content */
-.movie-card-details {
-  background-color: #1e1e1e;
-  padding: 16px;
-  width: 100%;
-  text-align: left;
-  color: #d0d0d0;
-  border-top: 1px solid #333; /* Tunn gräns för separation */
-}
-
-.movie-card-details p {
-  margin: 4px 0;
-}
-
-.movie-card.show-details .movie-card-details {
-  display: block; /* Visa när dropdown är aktiv */
+.movie-card-actions .bookmark-button {
+  margin-right: 10px;
 }
 
 /* Responsiv design för mobiler och iPads */
 @media (max-width: 480px) {
   .movie-card {
-    height: auto; /* Låt höjden anpassas efter innehållet */
+    height: auto;
     margin: 8px;
   }
 
   .movie-card img {
     height: auto;
-    object-fit: cover;
   }
 
   .movie-card h3 {
-    font-size: 1rem; /* Mindre textstorlek för mobil */
+    font-size: 1rem;
     margin: 8px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Lägg till "..." om titeln är för lång */
-    text-align: center;
-  }
-
-  .movie-card p {
-    font-size: 0.8rem;
-    color: #b0b0b0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    flex-grow: 1; /* Gör att beskrivningen växer för att fylla utrymmet */
   }
 
   .movie-card-actions {
-    display: flex;
-    justify-content: space-around; /* Sprid ut knapparna jämnt */
-    padding: 10px 0;
-    width: 100%;
+    padding: 10px;
   }
 
-  .movie-card-actions button {
-    flex: 1; /* Se till att knapparna tar lika mycket plats */
-    margin: 0 5px; /* Avstånd mellan knapparna */
+  .swiper-slide .movie-card {
+    width: 80%; 
+    max-width: 350px; 
+    height: auto;
   }
 
-  .swiper-slide {
-    width: auto !important;
-    display: flex;
-    justify-content: center;
-  }
+ 
+
 }

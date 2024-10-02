@@ -1,69 +1,51 @@
-import React, { useState } from "react";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { useBookmarks } from "../context/BookmarksContext";
-import "../styles/MovieCard.css";
+import React from 'react';
+import '../styles/MovieCard.css';
+import { Movie } from '../types/Movies';
+import { FaHeart, FaEllipsisH, FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { useBookmarks } from '../context/BookmarksContext';
 
-interface MovieCardProps {
-  title: string;
-  thumbnail: string;
-  synopsis: string;
-  rating: string;
-  genre: string;
-  year: number;
-  actors: string[];
+interface MovieCardProps extends Movie {
+  onClick?: () => void;
 }
 
-const MovieCard: React.FC<MovieCardProps> = (props) => {
-  const [showDetails, setShowDetails] = useState(false);
+const MovieCard: React.FC<MovieCardProps> = ({
+  title,
+  thumbnail,
+  synopsis,
+  rating,
+  genre,
+  year,
+  actors,
+  onClick,
+}) => {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
 
-  const handleBookmarkClick = () => {
-    if (isBookmarked(props.title)) {
-      removeBookmark(props.title);
+  const isBookmarkedMovie = isBookmarked(title);
+
+  const handleBookmarkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isBookmarkedMovie) {
+      removeBookmark(title);
     } else {
-      addBookmark(props);
+      const movie: Movie = { title, thumbnail, synopsis, rating, genre, year, actors };
+      addBookmark(movie);
     }
   };
 
   return (
-    <div className="movie-card">
-      <img
-        src={props.thumbnail}
-        alt={props.title}
-        className="movie-card-img"
-        onError={(e) => {
-          (e.target as HTMLImageElement).src = "path/to/fallback-image.jpg";
-        }}
-      />
-      <div className="movie-card-content">
-        <h3 className="movie-card-title">{props.title}</h3>
-
-        <div className="movie-card-actions">
-          <button className="like-button">❤️ Like</button>
-          <button className="play-button">▶️ Play</button>
-
-          {/* Bokmärkesknappen */}
-          <button className="bookmark-button" onClick={handleBookmarkClick}>
-            {isBookmarked(props.title) ? <FaBookmark /> : <FaRegBookmark />}
-          </button>
-        </div>
-
-        <button
-          className="dropdown-button"
-          onClick={() => setShowDetails(!showDetails)}
-        >
-          {showDetails ? "▲ Less Info" : "▼ More Info"}
+    <div className="movie-card" onClick={onClick}>
+      <img src={thumbnail} alt={title} />
+      <h3>{title}</h3>
+      <div className="movie-card-actions">
+        <button className="heart-button">
+          <FaHeart />
         </button>
-
-        {showDetails && (
-          <div className="movie-card-details">
-            <p>{props.synopsis}</p>
-            <p>Rating: {props.rating}</p>
-            <p>Genre: {props.genre}</p>
-            <p>Year: {props.year}</p>
-            <p>Actors: {props.actors.join(", ")}</p>
-          </div>
-        )}
+        <button className="ellipsis-button">
+          <FaEllipsisH />
+        </button>
+        <button className="bookmark-button" onClick={handleBookmarkClick}>
+          {isBookmarkedMovie ? <FaBookmark /> : <FaRegBookmark />}
+        </button>
       </div>
     </div>
   );
