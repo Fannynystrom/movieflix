@@ -23,47 +23,68 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Swiper pagination dots */
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+.swiper-pagination {
+  position: absolute;
+  bottom: -50px; /* Försök med små negativa värden för att flytta prickarna nedåt */
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10; /* Säkerställ att paginationen visas framför annat innehåll */
+}
+
 .swiper-pagination-bullet {
-  background-color: white;
+  background-color: #ffffff; /* Färg på prickarna */
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffcc00; /* Gul färg för den aktiva pagination-pricken */
+  background-color: #ffcc00; /* Färg på den aktiva pricken */
 }
 
-/* Responsiv design */
+/* Anpassa movie cards för mobiler och surfplattor */
 @media (max-width: 768px) {
   .carousel-container {
-    /* Eventuella specifika justeringar för iPads */
-    padding: 0 20px; /* Lägga till lite padding på sidorna */
+    /* Justering för iPads */
+    padding: 0 20px;
+  }
+
+  .swiper-slide .movie-card {
+    width: 90%; /* Gör korten bredare för surfplattor */
+    max-width: 350px; /* Begränsa maxbredden för bättre utseende */
   }
 
   .swiper-button-prev,
   .swiper-button-next {
-    padding: 8px; /* Minska padding för knappar på mindre skärmar */
-    font-size: 14px; /* Minska fontstorleken om det behövs */
+    padding: 8px;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-container {
-    /* Lägga till ytterligare padding för mobiler */
-    padding: 0 10px; /* Minska padding för ännu mindre skärmar */
+    /* Justering för mobiler */
+    padding: 0 10px;
+  }
+
+  .swiper-slide .movie-card {
+    width: 95%; /* Gör korten bredare för mobiler */
+    max-width: 400px; /* Begränsa maxbredden */
   }
 
   .swiper-button-prev,
   .swiper-button-next {
-    padding: 6px; /* Ytterligare minska padding */
-    font-size: 12px; /* Minska fontstorleken för mobiler */
+    padding: 6px;
+    font-size: 12px;
   }
 
   .swiper-pagination-bullet {
-    width: 10px; /* Minska storleken på pagination-dots */
-    height: 10px; /* Minska storleken på pagination-dots */
+    width: 10px;
+    height: 10px;
   }
 
   .swiper-pagination-bullet-active {
-    background-color: #ffcc00; /* Hålla samma färg för aktiva bullets */
+    background-color: #ffcc00;
   }
 }

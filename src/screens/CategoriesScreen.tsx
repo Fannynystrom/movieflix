@@ -3,7 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import useFetchMovies from "../hooks/FetchMovies";
 import MovieCard from "../components/MovieCard";
-import "../styles/MovieCard.css"; // Justera sökvägen om det behövs
+import MovieModal from "../components/MovieModal";
+import { Movie } from "../types/Movies";
 import "../styles/CategoriesStyles.css";
 import "../styles/slider.css";
 import "swiper/css";
@@ -14,6 +15,7 @@ const CategoriesScreen: React.FC = () => {
   const { movies, loading, error } = useFetchMovies();
   const [selectedCategory, setSelectedCategory] =
     useState<string>("Alla kategorier");
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading movies: {error}</p>;
@@ -24,9 +26,13 @@ const CategoriesScreen: React.FC = () => {
     ),
   );
 
+  const handleMovieSelect = (movie: Movie) => {
+    setSelectedMovie(movie);
+  };
+
   return (
     <div className="categories-container">
-      {/* Kategoriknappar */}
+      {/* Category buttons */}
       <div className="category-buttons">
         <button
           className={`category-button ${selectedCategory === "Alla kategorier" ? "active" : ""}`}
@@ -45,7 +51,7 @@ const CategoriesScreen: React.FC = () => {
         ))}
       </div>
 
-      {/* Visa filmer när en kategori är vald */}
+      {/* Display movies based on selected category */}
       {selectedCategory !== "Alla kategorier" ? (
         <div>
           <h2 className="selected-category-title">{selectedCategory}</h2>
@@ -57,13 +63,8 @@ const CategoriesScreen: React.FC = () => {
               .map((movie) => (
                 <MovieCard
                   key={movie.title}
-                  title={movie.title}
-                  thumbnail={movie.thumbnail || "path/to/default-image.jpg"}
-                  synopsis={movie.synopsis || "Description not available"}
-                  rating={movie.rating}
-                  genre={movie.genre}
-                  year={movie.year}
-                  actors={movie.actors || []}
+                  {...movie}
+                  onClick={() => handleMovieSelect(movie)}
                 />
               ))}
           </div>
@@ -79,26 +80,21 @@ const CategoriesScreen: React.FC = () => {
               <h3 className="category-title">{genre}</h3>
               <Swiper
                 modules={[Navigation, Pagination, A11y]}
-                spaceBetween={10} // Minska avståndet mellan korten
-                slidesPerView={2} // Visa två kort per rad
+                spaceBetween={10}
+                slidesPerView={2}
                 navigation
                 pagination={{ clickable: true }}
                 breakpoints={{
-                  480: { slidesPerView: 2, spaceBetween: 10 }, // Justera för mobil
-                  768: { slidesPerView: 3, spaceBetween: 20 }, // Justera för tablet
-                  1024: { slidesPerView: 4, spaceBetween: 30 }, // Standard för desktop
+                  480: { slidesPerView: 2, spaceBetween: 10 },
+                  768: { slidesPerView: 3, spaceBetween: 20 },
+                  1024: { slidesPerView: 4, spaceBetween: 30 },
                 }}
               >
                 {genreMovies.map((movie) => (
                   <SwiperSlide key={movie.title}>
                     <MovieCard
-                      title={movie.title}
-                      thumbnail={movie.thumbnail || "path/to/default-image.jpg"}
-                      synopsis={movie.synopsis || "Description not available"}
-                      rating={movie.rating}
-                      genre={movie.genre}
-                      year={movie.year}
-                      actors={movie.actors || []}
+                      {...movie}
+                      onClick={() => handleMovieSelect(movie)}
                     />
                   </SwiperSlide>
                 ))}
@@ -106,6 +102,12 @@ const CategoriesScreen: React.FC = () => {
             </div>
           );
         })
+      )}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
       )}
     </div>
   );

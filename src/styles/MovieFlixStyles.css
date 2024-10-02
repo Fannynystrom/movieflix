@@ -1,79 +1,96 @@
-/* Swiper container style */
-.carousel-container {
+/* Grundläggande stil för MovieFlix-sektionen */
+.movieflix-container {
+  padding-left: 20px; /* Standard padding för alla enheter */
+  padding-right: 20px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-}
-h2 {
-  font-size: 25px;
-  color: white;
-}
-h3.movie-card-title {
-  font-size: 15px;
-  color: white;
-  white-space: normal; /* Tillåter radbrytning */
-  overflow-wrap: break-word; /* Bryter ord som är för långa */
-  /* Ta bort följande egenskaper om de finns */
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
+  margin: 10px;
 }
 
-/* Swiper navigation buttons */
-.swiper-button-prev,
-.swiper-button-next {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border-radius: 50%;
-  padding: 10px;
-  z-index: 2;
+.trending-section {
+  margin-bottom: 50px; /* Lägg till extra mellanrum efter Trending sektionen */
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+.recommended-section {
+  margin-top: 50px; /* Lägg till extra mellanrum före Recommended sektionen */
 }
 
-/* Swiper pagination dots */
+.section-title {
+  color: #fff;
+  font-size: 2rem; /* Standardstorlek på desktop */
+  margin-bottom: 20px;
+  text-align: left; /* Vänsterjusterad rubrik */
+}
+
+/* Se till att swiper-container har position: relative */
+.swiper-container {
+  position: relative; /* Gör det möjligt att placera pagination absolut */
+}
+
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+/* Flytta pagination-prickarna längre ner */
+.swiper-pagination {
+  position: absolute; /* Viktigt för att placera pagination absolut */
+  bottom: -20px; /* Justera detta värde för att flytta prickarna längre ner */
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10; /* Säkerställ att paginationen syns framför andra element */
+}
+
 .swiper-pagination-bullet {
-  background-color: white;
+  background-color: #ffffff; /* Färg på prickarna */
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffcc00;
+  background-color: #ffcc00; /* Färg på den aktiva pricken */
 }
 
-/* Responsiv design för Swiper */
-@media (max-width: 768px) {
-  .carousel-container {
-    padding: 0 20px;
-  }
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    padding: 8px;
-    font-size: 14px;
-  }
-}
-
+/* Mobilanpassning för rubriken och padding */
 @media (max-width: 480px) {
-  .carousel-container {
-    padding: 0 10px;
+  .movieflix-container {
+    padding-left: 0px; /* Mindre padding för mobiler */
+    padding-right: 10px;
   }
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    padding: 6px;
-    font-size: 12px;
+  .section-title {
+    font-size: 1.2rem; /* Mindre textstorlek för mobiler */
+    padding-left: 20px;
   }
 
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
+  .swiper-pagination {
+    bottom: -15px; /* Specifik justering för mobiler */
+  }
+}
+
+/* Anpassning för surfplattor */
+@media (min-width: 481px) and (max-width: 768px) {
+  .movieflix-container {
+    padding-left: 15px; /* Lite större padding för surfplattor */
+    padding-right: 15px;
   }
 
-  .swiper-pagination-bullet-active {
-    background-color: #ffcc00;
+  .section-title {
+    font-size: 1.75rem; /* Något större rubrik för surfplattor */
+  }
+
+  .swiper-pagination {
+    bottom: -18px; /* Specifik justering för surfplattor */
+  }
+}
+
+/* För desktop */
+@media (min-width: 769px) {
+  .movieflix-container {
+    padding-left: 20px; /* Standard padding på desktop */
+    padding-right: 20px;
+  }
+
+  .section-title {
+    font-size: 2rem; /* Standardstorlek på rubriken för desktop */
+  }
+
+  .swiper-pagination {
+    bottom: -20px; /* Justering för desktop */
   }
 }
