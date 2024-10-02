@@ -41,9 +41,9 @@ const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
           },
         }}
       >
-        {movies.map((movie) => (
-          <SwiperSlide key={movie.title}>
-            <MovieCard {...movie} onClick={() => onMovieSelect(movie)} />
+        {movies.map((movie, index) => (
+          <SwiperSlide key={index} role="listitem">
+            <MovieCard {...movie} />
           </SwiperSlide>
         ))}
       </Swiper>
