@@ -61,8 +61,12 @@ const MovieCard: React.FC<MovieCardProps> = ({
         <button className="play-button">
           <FaPlay />
         </button>
-        <button className="bookmark-button" onClick={handleBookmarkClick}>
-          {isBookmarkedMovie ? <FaBookmark /> : <FaRegBookmark />}
+        <button
+          className="bookmark-button"
+          onClick={handleBookmarkClick}
+          aria-label={isBookmarked(title) ? "Remove bookmark" : "Add bookmark"}
+        >
+          {isBookmarked(title) ? <FaBookmark /> : <FaRegBookmark />}
         </button>
       </div>
     </div>
