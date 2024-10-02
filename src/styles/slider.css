@@ -35,7 +35,6 @@
   z-index: 10; /* Säkerställ att paginationen visas framför annat innehåll */
 }
 
-
 .swiper-pagination-bullet {
   background-color: #ffffff; /* Färg på prickarna */
 }
@@ -43,9 +42,6 @@
 .swiper-pagination-bullet-active {
   background-color: #ffcc00; /* Färg på den aktiva pricken */
 }
-
-
-
 
 /* Anpassa movie cards för mobiler och surfplattor */
 @media (max-width: 768px) {

@@ -1,130 +1,131 @@
 /* Modal overlay */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  /* Modal innehåll */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal innehåll */
+.movie-modal {
+  background: linear-gradient(90deg, #1c2a3a, #2f4a6b);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 700px; /* Gör modalen lite bredare */
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+/* Justera bildens storlek */
+.movie-modal img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  max-height: 500px;
+  border-radius: 5px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Textinnehållet i modalen */
+.movie-modal .modal-content {
+  width: 80%;
+  text-align: left;
+}
+
+/* Rubrik */
+.movie-modal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+/* Paragraferna */
+.movie-modal p {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  display: flex;
+}
+
+/* Titlarna i paragraferna */
+.movie-modal p strong {
+  min-width: 120px; /* Gör så att alla titlar börjar på samma position */
+  display: inline-block;
+}
+
+/* Stäng-knapp */
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 2px;
+  border: none;
+  background: none;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+/* Ikonsektionen under bilden */
+.movie-modal-actions {
+  display: flex;
+  justify-content: space-between; /* Sprider ut ikonerna jämnt */
+  width: 50%;
+  margin-top: 10px;
+}
+
+/* Stil för knapparna */
+.movie-modal-actions button {
+  background-color: transparent;
+  border: 1px solid #e0e0e0; /* Lägg till border runt ikonerna */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border 0.2s;
+  flex: 1; /* Se till att knapparna tar lika mycket plats */
+  margin: 0 5px; /* Lägger till mellanrum mellan ikonerna */
+  text-align: center;
+}
+
+/* Specifik stil för hjärtikonen */
+.heart-button svg {
+  color: red; /* Gör hjärtat rött */
+}
+
+/* Specifik stil för bokmärkesikonen */
+.bookmark-button svg {
+  color: #ffcc00; /* Guldaktig färg för bokmärkta objekt */
+}
+
+/* Specifik stil för ellipsis-ikonen */
+.ellipsis-button svg {
+  color: #e0e0e0; /* Neutral färg */
+}
+
+/* Responsiv design för mindre skärmar */
+@media (max-width: 768px) {
   .movie-modal {
-    background: linear-gradient(90deg, #1c2a3a, #2f4a6b);
-    padding: 20px;
-    border-radius: 10px;
-    position: relative;
-    max-width: 700px; /* Gör modalen lite bredare */
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #fff;
+    max-width: 100%; /* Tar upp hela bredden för mobiler */
   }
-  
-  /* Justera bildens storlek */
-  .movie-modal img {
-    width: 100%;
-    max-width: 600px; 
-    height: auto; 
-    max-height: 500px; 
-    border-radius: 5px;
-    padding-top: 20px;
-    margin-bottom: 20px; 
-  }
-  
-  /* Textinnehållet i modalen */
   .movie-modal .modal-content {
-    width: 80%;
+    width: 90%;
     text-align: left;
   }
-  
-  /* Rubrik */
-  .movie-modal h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.8rem;
+  .movie-modal img {
+    width: 100%; /* Bilden tar upp hela bredden på mobiler */
+    max-height: 250px; /* Begränsa maxhöjden ytterligare för små skärmar */
   }
-  
-  /* Paragraferna */
-  .movie-modal p {
-    margin-bottom: 10px;
-    line-height: 1.5;
-    display: flex;
-  }
-  
-  /* Titlarna i paragraferna */
-  .movie-modal p strong {
-    min-width: 120px; /* Gör så att alla titlar börjar på samma position */
-    display: inline-block;
-  }
-  
-  /* Stäng-knapp */
-  .close-button {
-    position: absolute;
-    top: 0px;
-    right: 2px;
-    border: none;
-    background: none;
-    font-size: 40px;
-    color: white;
-    cursor: pointer;
-  }
-  /* Ikonsektionen under bilden */
-  .movie-modal-actions {
-    display: flex;
-    justify-content: space-between; /* Sprider ut ikonerna jämnt */
-    width: 50%;
-    margin-top: 10px;
-  }
-  
-  /* Stil för knapparna */
-  .movie-modal-actions button {
-    background-color: transparent;
-    border: 1px solid #e0e0e0; /* Lägg till border runt ikonerna */
-    border-radius: 5px; /* Rundade hörn */
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s, border 0.2s;
-    flex: 1; /* Se till att knapparna tar lika mycket plats */
-    margin: 0 5px; /* Lägger till mellanrum mellan ikonerna */
-    text-align: center;
-  }
-  
-  /* Specifik stil för hjärtikonen */
-  .heart-button svg {
-    color: red; /* Gör hjärtat rött */
-  }
-  
-  /* Specifik stil för bokmärkesikonen */
-  .bookmark-button svg {
-    color: #ffcc00; /* Guldaktig färg för bokmärkta objekt */
-  }
-  
-  /* Specifik stil för ellipsis-ikonen */
-  .ellipsis-button svg {
-    color: #e0e0e0; /* Neutral färg */
-  }
-  
-  
-  /* Responsiv design för mindre skärmar */
-  @media (max-width: 768px) {
-    .movie-modal {
-      max-width: 100%; /* Tar upp hela bredden för mobiler */
-    }
-    .movie-modal .modal-content {
-        width: 90%;
-        text-align: left;
-      }
-    .movie-modal img {
-      width: 100%; /* Bilden tar upp hela bredden på mobiler */
-      max-height: 250px; /* Begränsa maxhöjden ytterligare för små skärmar */
-    }
-  }
-  
+}

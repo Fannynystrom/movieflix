@@ -3,7 +3,9 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,7 +46,6 @@
   margin: 5px 0;
 }
 
-
 .movie-card-actions {
   display: flex;
   justify-content: space-between; /* Sprider ut ikonerna */
@@ -61,7 +62,10 @@
   font-size: 1.5rem; /* Standardstorlek på ikonerna */
   color: #e0e0e0;
   padding: 6px 10px;
-  transition: background-color 0.2s, color 0.2s, border 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border 0.2s;
 }
 
 /* Hover-effekt för knapparna */
@@ -73,13 +77,13 @@
 
 /* Specifik stil för hjärtikonen */
 .movie-card-actions .heart-button svg {
-  color: #ff0000; 
-  font-size: 1.5rem; 
+  color: #ff0000;
+  font-size: 1.5rem;
 }
 
 /* Specifik stil för bokmärkesikonen */
 .movie-card-actions .bookmark-button svg {
-  color: #ffcc00; 
+  color: #ffcc00;
   font-size: 1.5rem;
 }
 
@@ -122,13 +126,8 @@
   }
 
   .swiper-slide .movie-card {
-    width: 80%; 
-    max-width: 350px; 
+    width: 80%;
+    max-width: 350px;
     height: auto;
   }
 }
-
-
- 
-
-

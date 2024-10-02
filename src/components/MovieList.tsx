@@ -11,7 +11,7 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
     <div className="movie-list">
       {movies.map((movie, index) => (
         <MovieCard
-          key={index} 
+          key={index}
           title={movie.title}
           thumbnail={movie.thumbnail}
           synopsis={movie.synopsis}

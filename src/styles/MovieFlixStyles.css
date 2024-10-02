@@ -1,100 +1,96 @@
 /* Grundläggande stil för MovieFlix-sektionen */
 .movieflix-container {
-    padding-left: 20px; /* Standard padding för alla enheter */
-    padding-right: 20px;
-    width: 100%;
-margin: 10px;
-  }
+  padding-left: 20px; /* Standard padding för alla enheter */
+  padding-right: 20px;
+  width: 100%;
+  margin: 10px;
+}
 
-  .trending-section {
-    margin-bottom: 50px; /* Lägg till extra mellanrum efter Trending sektionen */
-  }
-  
-  .recommended-section {
-    margin-top: 50px; /* Lägg till extra mellanrum före Recommended sektionen */
-  }
-  
-  .section-title {
-    color: #fff;
-    font-size: 2rem; /* Standardstorlek på desktop */
-    margin-bottom: 20px;
-    text-align: left; /* Vänsterjusterad rubrik */
-  }
-  
-  /* Se till att swiper-container har position: relative */
-  .swiper-container {
-    position: relative; /* Gör det möjligt att placera pagination absolut */
-  }
-  
+.trending-section {
+  margin-bottom: 50px; /* Lägg till extra mellanrum efter Trending sektionen */
+}
+
+.recommended-section {
+  margin-top: 50px; /* Lägg till extra mellanrum före Recommended sektionen */
+}
+
+.section-title {
+  color: #fff;
+  font-size: 2rem; /* Standardstorlek på desktop */
+  margin-bottom: 20px;
+  text-align: left; /* Vänsterjusterad rubrik */
+}
+
+/* Se till att swiper-container har position: relative */
+.swiper-container {
+  position: relative; /* Gör det möjligt att placera pagination absolut */
+}
+
 /* Flytta pagination-prickarna längre ner */
 /* Flytta pagination-prickarna längre ner */
 /* Flytta pagination-prickarna längre ner */
 .swiper-pagination {
-    position: absolute; /* Viktigt för att placera pagination absolut */
-    bottom: -20px; /* Justera detta värde för att flytta prickarna längre ner */
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 10; /* Säkerställ att paginationen syns framför andra element */
+  position: absolute; /* Viktigt för att placera pagination absolut */
+  bottom: -20px; /* Justera detta värde för att flytta prickarna längre ner */
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10; /* Säkerställ att paginationen syns framför andra element */
+}
+
+.swiper-pagination-bullet {
+  background-color: #ffffff; /* Färg på prickarna */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffcc00; /* Färg på den aktiva pricken */
+}
+
+/* Mobilanpassning för rubriken och padding */
+@media (max-width: 480px) {
+  .movieflix-container {
+    padding-left: 0px; /* Mindre padding för mobiler */
+    padding-right: 10px;
   }
-  
-  .swiper-pagination-bullet {
-    background-color: #ffffff; /* Färg på prickarna */
+
+  .section-title {
+    font-size: 1.2rem; /* Mindre textstorlek för mobiler */
+    padding-left: 20px;
   }
-  
-  .swiper-pagination-bullet-active {
-    background-color: #ffcc00; /* Färg på den aktiva pricken */
+
+  .swiper-pagination {
+    bottom: -15px; /* Specifik justering för mobiler */
   }
-  
-  
-  
-  
-  /* Mobilanpassning för rubriken och padding */
-  @media (max-width: 480px) {
-    .movieflix-container {
-      padding-left: 0px; /* Mindre padding för mobiler */
-      padding-right: 10px;
-    }
-  
-    .section-title {
-      font-size: 1.2rem; /* Mindre textstorlek för mobiler */
-      padding-left: 20px;
-    }
-  
-    .swiper-pagination {
-      bottom: -15px; /* Specifik justering för mobiler */
-    }
+}
+
+/* Anpassning för surfplattor */
+@media (min-width: 481px) and (max-width: 768px) {
+  .movieflix-container {
+    padding-left: 15px; /* Lite större padding för surfplattor */
+    padding-right: 15px;
   }
-  
-  /* Anpassning för surfplattor */
-  @media (min-width: 481px) and (max-width: 768px) {
-    .movieflix-container {
-      padding-left: 15px; /* Lite större padding för surfplattor */
-      padding-right: 15px;
-    }
-  
-    .section-title {
-      font-size: 1.75rem; /* Något större rubrik för surfplattor */
-    }
-  
-    .swiper-pagination {
-      bottom: -18px; /* Specifik justering för surfplattor */
-    }
+
+  .section-title {
+    font-size: 1.75rem; /* Något större rubrik för surfplattor */
   }
-  
-  /* För desktop */
-  @media (min-width: 769px) {
-    .movieflix-container {
-      padding-left: 20px; /* Standard padding på desktop */
-      padding-right: 20px;
-    }
-  
-    .section-title {
-      font-size: 2rem; /* Standardstorlek på rubriken för desktop */
-    }
-  
-    .swiper-pagination {
-      bottom: -20px; /* Justering för desktop */
-    }
+
+  .swiper-pagination {
+    bottom: -18px; /* Specifik justering för surfplattor */
   }
-  
+}
+
+/* För desktop */
+@media (min-width: 769px) {
+  .movieflix-container {
+    padding-left: 20px; /* Standard padding på desktop */
+    padding-right: 20px;
+  }
+
+  .section-title {
+    font-size: 2rem; /* Standardstorlek på rubriken för desktop */
+  }
+
+  .swiper-pagination {
+    bottom: -20px; /* Justering för desktop */
+  }
+}
