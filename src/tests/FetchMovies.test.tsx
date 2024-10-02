@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { renderHook, cleanup, waitFor } from '@testing-library/react';
-import useFetchMovies from '../hooks/FetchMovies';
-import { onValue } from 'firebase/database';
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { renderHook, cleanup, waitFor } from "@testing-library/react";
+import useFetchMovies from "../hooks/FetchMovies";
+import { onValue } from "firebase/database";
 
 // Mocka firebase/database
 vi.mock("firebase/database", () => {
@@ -36,13 +36,13 @@ vi.mock("firebase/database", () => {
         val: () => mockData,
       });
 
-      return vi.fn(); 
+      return vi.fn();
     }),
     getDatabase: vi.fn(),
   };
 });
 
-describe('useFetchMovies', () => {
+describe("useFetchMovies", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -51,7 +51,7 @@ describe('useFetchMovies', () => {
     cleanup();
   });
 
-  it('fetches movies and sets loading to false', async () => {
+  it("fetches movies and sets loading to false", async () => {
     const { result } = renderHook(() => useFetchMovies());
     await waitFor(() => {
       expect(result.current.movies.length).toBe(2);
@@ -60,21 +60,21 @@ describe('useFetchMovies', () => {
     });
   });
 
-  it('handles error correctly', async () => {
+  it("handles error correctly", async () => {
     vi.mocked(onValue).mockImplementationOnce((_, callback, errorCallback) => {
-      errorCallback(new Error('Firebase error'));
+      errorCallback(new Error("Firebase error"));
       return vi.fn();
     });
 
     const { result } = renderHook(() => useFetchMovies());
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
-      expect(result.current.error).toBe('Firebase error');
+      expect(result.current.error).toBe("Firebase error");
       expect(result.current.movies.length).toBe(0);
     });
   });
 
-  it('returns an empty array and sets loading to false when no movies exist', async () => {
+  it("returns an empty array and sets loading to false when no movies exist", async () => {
     vi.mocked(onValue).mockImplementationOnce((_, callback) => {
       callback({
         exists: () => false,
@@ -91,7 +91,7 @@ describe('useFetchMovies', () => {
     });
   });
 
-  it('randomizes movies when randomize is true', async () => {
+  it("randomizes movies when randomize is true", async () => {
     const { result } = renderHook(() => useFetchMovies(true));
     await waitFor(() => {
       const movies = result.current.movies;
@@ -100,7 +100,7 @@ describe('useFetchMovies', () => {
     });
   });
 
-  it('returns correct movie details', async () => {
+  it("returns correct movie details", async () => {
     const { result } = renderHook(() => useFetchMovies());
     await waitFor(() => {
       expect(result.current.movies[0]).toEqual({
