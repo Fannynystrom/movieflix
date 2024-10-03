@@ -176,8 +176,6 @@
   color: black;
 }
 
-
-
 /* Mobil vy */
 @media (max-width: 768px) {
   .navbar {
@@ -217,11 +215,11 @@
   }
 
   .search-field {
-      margin: 0;
+    margin: 0;
   }
 
   .search-results {
-    width: 100%; 
+    width: 100%;
   }
 }
 
