@@ -6,6 +6,8 @@
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  padding: 10px;
+  z-index: 1; /* Lägre z-index än sökresultaten */
 }
 
 /* Swiper navigation buttons */
@@ -23,24 +25,21 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Flytta pagination-prickarna längre ner */
-/* Flytta pagination-prickarna längre ner */
-/* Flytta pagination-prickarna längre ner */
 .swiper-pagination {
   position: absolute;
-  bottom: -50px; /* Försök med små negativa värden för att flytta prickarna nedåt */
+  bottom: -50px;
   left: 0;
   right: 0;
   text-align: center;
-  z-index: 10; /* Säkerställ att paginationen visas framför annat innehåll */
+  z-index: 10;
 }
 
 .swiper-pagination-bullet {
-  background-color: #ffffff; /* Färg på prickarna */
+  background-color: #ffffff;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffcc00; /* Färg på den aktiva pricken */
+  background-color: #ffcc00;
 }
 
 /* Anpassa movie cards för mobiler och surfplattor */

@@ -1,3 +1,4 @@
+// src/AppRouter.tsx
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -12,11 +13,12 @@ import Login from "./screens/Login";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MovieFlixScreen from "./screens/MovieFlixScreen";
+import BackgroundVideo from "./components/BackgroundsVideo";
 import "./styles/App.css";
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  return isAuthenticated ? element : <Navigate to="/login" replace />;
 };
 
 const AppRouter: React.FC = () => {
@@ -36,9 +38,14 @@ const AppContent: React.FC = () => {
 
   return (
     <>
+      {/* Bakgrundsvideon visas alltid */}
+      <BackgroundVideo />
+      {/* Navigation visas endast om användaren är autentiserad */}
       {isAuthenticated && <Navigation />}
       <Routes>
+        {/* Login-sidan */}
         <Route path="/login" element={<Login />} />
+        {/* Skyddade rutter */}
         <Route
           path="/"
           element={<ProtectedRoute element={<MovieFlixScreen />} />}
@@ -51,6 +58,8 @@ const AppContent: React.FC = () => {
           path="/bookmarked"
           element={<ProtectedRoute element={<BookMarkedScreen />} />}
         />
+        {/* Hantera icke-definierade rutter */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
