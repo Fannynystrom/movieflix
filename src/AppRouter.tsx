@@ -1,10 +1,6 @@
+// src/AppRouter.tsx
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
 import { BookmarksProvider } from "./context/BookmarksContext";
 import Navigation from "./navigation/Navigate";
@@ -12,6 +8,7 @@ import Login from "./screens/Login";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MovieFlixScreen from "./screens/MovieFlixScreen";
+import BackgroundVideo from "./components/BackgroundsVideo";
 import "./styles/App.css";
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
@@ -36,6 +33,7 @@ const AppContent: React.FC = () => {
 
   return (
     <>
+      <BackgroundVideo />
       {isAuthenticated && <Navigation />}
       <Routes>
         <Route path="/login" element={<Login />} />
