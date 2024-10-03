@@ -5,13 +5,14 @@ import MovieCard from "../components/MovieCard";
 import { Movie } from "../types/Movies";
 import "../styles/slider.css";
 
-interface RecommendedCarouselProps {
+interface TrendingCarouselProps {
   movies: Movie[];
-  onMovieSelect: (movie: Movie) => void;
+  onMovieSelect: (movie: Movie) => void; // Added onMovieSelect
 }
 
-const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
+const TrendingCarousel: React.FC<TrendingCarouselProps> = ({
   movies,
+  onMovieSelect,
 }) => {
   return (
     <div className="carousel-container" style={{ position: "relative" }}>
@@ -22,27 +23,16 @@ const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
         navigation
         pagination={{ clickable: true }}
         breakpoints={{
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
+          320: { slidesPerView: 2, spaceBetween: 10 },
+          480: { slidesPerView: 2, spaceBetween: 10 },
+          768: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 30 },
         }}
       >
         {movies.map((movie, index) => (
           <SwiperSlide key={index} role="listitem">
-            <MovieCard {...movie} />
+            <MovieCard {...movie} onClick={() => onMovieSelect(movie)} />{" "}
+            {/* Pass onMovieSelect */}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -50,4 +40,4 @@ const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
   );
 };
 
-export default RecommendedCarousel;
+export default TrendingCarousel;

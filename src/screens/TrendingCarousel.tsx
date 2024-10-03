@@ -7,10 +7,13 @@ import "../styles/slider.css";
 
 interface TrendingCarouselProps {
   movies: Movie[];
-  onMovieSelect: (movie: Movie) => void;
+  onMovieSelect: (movie: Movie) => void; // Keeping onMovieSelect in props
 }
 
-const TrendingCarousel: React.FC<TrendingCarouselProps> = ({ movies }) => {
+const TrendingCarousel: React.FC<TrendingCarouselProps> = ({
+  movies,
+  onMovieSelect,
+}) => {
   return (
     <div className="carousel-container" style={{ position: "relative" }}>
       <Swiper
@@ -28,7 +31,10 @@ const TrendingCarousel: React.FC<TrendingCarouselProps> = ({ movies }) => {
       >
         {movies.map((movie, index) => (
           <SwiperSlide key={index} role="listitem">
-            <MovieCard {...movie} />
+            <MovieCard
+              {...movie}
+              onClick={() => onMovieSelect(movie)} // Pass onMovieSelect to MovieCard
+            />
           </SwiperSlide>
         ))}
       </Swiper>
