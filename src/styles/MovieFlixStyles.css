@@ -24,6 +24,8 @@
 /* Se till att swiper-container har position: relative */
 .swiper-container {
   position: relative; /* Gör det möjligt att placera pagination absolut */
+  z-index: 1; /* Lägre z-index än sökresultaten */
+
 }
 
 /* Flytta pagination-prickarna längre ner */
