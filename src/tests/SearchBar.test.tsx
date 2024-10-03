@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event"; // Använd userEvent istället för fireEvent
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import { describe, it, expect } from "vitest";
-import { Movie } from "../types/Movies"; // Importera din Movie-typ
+import { Movie } from "../types/Movies";
+import { BookmarksProvider } from "../context/BookmarksContext";
 
 // Använd typad mockdata
 const mockData: Movie[] = [
@@ -27,12 +28,15 @@ const mockData: Movie[] = [
   },
 ];
 
+// Testa SearchBar-komponenten
 describe("SearchBar Component", () => {
+  // Kontrollera att sökikonen renderas korrekt
   it("renderar sökikonen", () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     expect(screen.getByTestId("search-icon")).toBeInTheDocument();
   });
 
+  // Testa att sökfältets synlighet växlar när ikonen klickas
   it("växlar synligheten för sökfältet när ikonen klickas", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchIcon = screen.getByTestId("search-icon");
@@ -50,12 +54,14 @@ describe("SearchBar Component", () => {
     ).not.toHaveClass("active");
   });
 
+  // Kontrollera att inga sökresultat visas initialt
   it("visar inga sökresultat initialt", () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     // Kontrollera att det inte finns någon lista med sökresultat
     expect(screen.queryByRole("list")).not.toBeInTheDocument();
   });
 
+  // Testa att korrekta resultat visas vid sökning
   it("visar korrekta resultat vid sökning", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");
@@ -67,6 +73,7 @@ describe("SearchBar Component", () => {
     expect(screen.getByText("Movie 1")).toBeInTheDocument();
   });
 
+  // Kontrollera att maximalt 8 sökresultat visas
   it("visar maximalt 8 sökresultat", async () => {
     const extendedData: Movie[] = [...Array(10).keys()].map((i) => ({
       title: `Movie ${i + 1}`,
@@ -87,5 +94,68 @@ describe("SearchBar Component", () => {
     // Kontrollera att endast 8 resultat visas, även om det finns fler filmer
     const listItems = screen.getAllByRole("listitem");
     expect(listItems.length).toBe(8);
+  });
+
+  // Kontrollera att inga resultat visas om söksträngen raderas
+  it("visar inga resultat om söksträngen raderas", async () => {
+    render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
+    const searchInput = screen.getByPlaceholderText("Sök filmer...");
+
+    // Skriv in en söksträng
+    await userEvent.type(searchInput, "Movie 1");
+    expect(screen.getByText("Movie 1")).toBeInTheDocument();
+
+    // Rensa söksträngen
+    await userEvent.clear(searchInput);
+    expect(screen.queryByText("Movie 1")).not.toBeInTheDocument();
+  });
+
+  // Testa att söka korrekt på synopsis och genre
+  it("söker korrekt på synopsis och genre", async () => {
+    render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
+    const searchInput = screen.getByPlaceholderText("Sök filmer...");
+
+    // Sök efter film baserat på synopsis
+    await userEvent.type(searchInput, "Synopsis 2");
+    expect(screen.getByText("Movie 2")).toBeInTheDocument();
+
+    // Rensa och sök efter film baserat på genre
+    await userEvent.clear(searchInput);
+    await userEvent.type(searchInput, "Genre 1");
+    expect(screen.getByText("Movie 1")).toBeInTheDocument();
+  });
+
+  // Kontrollera att modalen öppnas när en film klickas
+  it("öppnar modalen när en film klickas", async () => {
+    render(
+      <BookmarksProvider>
+        <SearchBar data={mockData} />
+      </BookmarksProvider>,
+      { wrapper: BrowserRouter },
+    );
+
+    const searchInput = screen.getByPlaceholderText("Sök filmer...");
+
+    // Sök efter en film
+    await userEvent.type(searchInput, "Movie 1");
+    const movieResult = screen.getByText("Movie 1");
+
+    // Klicka på filmen
+    await userEvent.click(movieResult);
+
+    // Kontrollera att modalen visas med den valda filmen
+    expect(screen.getByText("Synopsis 1")).toBeInTheDocument(); // Kontrollera en specifik del av modalinnehållet
+  });
+
+  // Testa att inga resultat visas om sökningen inte matchar något
+  it("visar inga resultat om sökningen inte matchar något", async () => {
+    render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
+    const searchInput = screen.getByPlaceholderText("Sök filmer...");
+
+    // Simulera en sökning med en sträng som inte finns
+    await userEvent.type(searchInput, "Nonexistent Movie");
+
+    // Kontrollera att inga resultat visas
+    expect(screen.queryByRole("list")).not.toBeInTheDocument();
   });
 });

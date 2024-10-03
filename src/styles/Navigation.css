@@ -128,20 +128,42 @@
 
 .search-results {
   position: absolute;
-  top: 50px;
+  top: 45px;
   width: 200px;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
-  z-index: 1000;
+  z-index: 9999;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
 .search-results li {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
   padding: 10px;
-  border-bottom: 1px solid #eee;
+  position: relative;
+  background: linear-gradient(45deg, #b6dbe2, #3587a0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease,
+    font-size 0.3s ease;
+}
+
+.search-results li:hover {
+  cursor: pointer;
+  transform: scale(1); /* Förstora länken vid hover */
+  font-size: 1.4rem; /* Ändra textstorlek för att märkbart förstora texten */
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Lägg till en tydlig skugga för lyfteffekt */
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease,
+    font-size 0.3s ease;
 }
 
 .search-results li a {
@@ -150,7 +172,8 @@
 }
 
 .search-results li:hover {
-  background-color: #f1f1f1;
+  background-color: #f0f0f0; /* Ändra bakgrundsfärg vid hover */
+  color: #007bff; /* Ändra textfärg vid hover, likt en länk */
 }
 
 /* Mobil vy */

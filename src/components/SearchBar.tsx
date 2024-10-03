@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
-import { Link } from "react-router-dom";
-//Test för autodeploy
-
-interface Movie {
-  title: string;
-  synopsis: string;
-  genre: string;
-  actors: string[];
-}
+import MovieModal from "./MovieModal"; // Importera din MovieModal-komponent
+import { Movie } from "../types/Movies"; // Se till att denna är rätt
 
 interface SearchBarProps {
   data: Movie[];
@@ -19,6 +12,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<Movie[]>([]);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); // State för vald film
+  const [isModalOpen, setIsModalOpen] = useState(false); // State för att hantera modalens visning
 
   const fuse = new Fuse<Movie>(data, {
     keys: ["title", "synopsis", "genre", "actors"],
@@ -33,6 +28,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
     } else {
       setResults([]);
     }
+  };
+
+  const handleMovieClick = (movie: Movie) => {
+    setSelectedMovie(movie); // Sätt den valda filmen
+    setIsModalOpen(true); // Öppna modalen
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Stäng modalen
+    setSelectedMovie(null); // Återställ vald film
   };
 
   return (
@@ -53,13 +58,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
         {results.length > 0 && (
           <ul className="search-results">
             {results.slice(0, 8).map((result, index) => (
-              <li key={index}>
-                <Link to={`/movie/${result.title}`}>{result.title}</Link>
+              <li key={index} onClick={() => handleMovieClick(result)}>
+                {result.title}
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      {/* Visa MovieModal om en film är vald */}
+      {isModalOpen && selectedMovie && (
+        <MovieModal movie={selectedMovie} onClose={closeModal} />
+      )}
     </div>
   );
 };
