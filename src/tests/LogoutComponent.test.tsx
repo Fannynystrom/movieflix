@@ -28,7 +28,9 @@ describe("LogoutComponent", () => {
   // Test 2: Kontrollera att logout-funktionen anropas vid klick
   it("kallar logout-funktionen vid knappklick", () => {
     const mockLogout = vi.fn();
-    (useAuth as jest.Mock).mockReturnValue({ logout: mockLogout } as AuthContextType);
+    (useAuth as jest.Mock).mockReturnValue({
+      logout: mockLogout,
+    } as AuthContextType);
 
     render(<LogoutComponent />);
 
@@ -43,7 +45,9 @@ describe("LogoutComponent", () => {
 
   // Test 3: Kontrollera att knappen har rätt klassnamn
   it("har rätt klassnamn på knappen", () => {
-    (useAuth as jest.Mock).mockReturnValue({ logout: vi.fn() } as AuthContextType);
+    (useAuth as jest.Mock).mockReturnValue({
+      logout: vi.fn(),
+    } as AuthContextType);
 
     render(<LogoutComponent />);
 
@@ -56,7 +60,9 @@ describe("LogoutComponent", () => {
   // Test 4: Kontrollera att logout-funktionen är en giltig funktion
   it("returnerar en giltig logout-funktion från useAuth", () => {
     const mockLogout = vi.fn();
-    (useAuth as jest.Mock).mockReturnValue({ logout: mockLogout } as AuthContextType);
+    (useAuth as jest.Mock).mockReturnValue({
+      logout: mockLogout,
+    } as AuthContextType);
 
     render(<LogoutComponent />);
 
@@ -66,7 +72,9 @@ describe("LogoutComponent", () => {
 
   // Test 5: Kontrollera att rätt text visas på knappen
   it("visar korrekt text på knappen", () => {
-    (useAuth as jest.Mock).mockReturnValue({ logout: vi.fn() } as AuthContextType);
+    (useAuth as jest.Mock).mockReturnValue({
+      logout: vi.fn(),
+    } as AuthContextType);
 
     render(<LogoutComponent />);
 
