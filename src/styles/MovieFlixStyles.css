@@ -15,10 +15,10 @@
 }
 
 .section-title {
-  color: #fff;
+  color: rgb(255, 255, 255);
   font-size: 2rem; /* Standardstorlek på desktop */
   margin-bottom: 20px;
-  text-align: left; /* Vänsterjusterad rubrik */
+  text-align: center; /* Vänsterjusterad rubrik */
 }
 
 /* Se till att swiper-container har position: relative */

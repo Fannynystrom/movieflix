@@ -7,7 +7,7 @@ const BackgroundVideo: React.FC = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5; // hastighet på HALVA asså långsammare
+      videoRef.current.playbackRate = 0.4; // hastighet på HALVA asså långsammare
     }
   }, []);
 
