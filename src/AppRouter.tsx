@@ -13,7 +13,7 @@ import Login from "./screens/Login";
 import BookMarkedScreen from "./screens/BookmarkedScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MovieFlixScreen from "./screens/MovieFlixScreen";
-import BackgroundVideo from "./components/BackgroundsVideo"; 
+import BackgroundVideo from "./components/BackgroundsVideo";
 import "./styles/App.css";
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {

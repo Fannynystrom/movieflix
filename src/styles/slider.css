@@ -8,7 +8,6 @@
   position: relative;
   padding: 10px;
   z-index: 1; /* Lägre z-index än sökresultaten */
-
 }
 
 /* Swiper navigation buttons */
@@ -26,22 +25,21 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-
 .swiper-pagination {
   position: absolute;
-  bottom: -50px; 
+  bottom: -50px;
   left: 0;
   right: 0;
   text-align: center;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .swiper-pagination-bullet {
-  background-color: #ffffff; 
+  background-color: #ffffff;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffcc00; 
+  background-color: #ffcc00;
 }
 
 /* Anpassa movie cards för mobiler och surfplattor */
