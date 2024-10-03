@@ -10,10 +10,7 @@ interface TrendingCarouselProps {
   onMovieSelect: (movie: Movie) => void;
 }
 
-const TrendingCarousel: React.FC<TrendingCarouselProps> = ({
-  movies,
-  onMovieSelect,
-}) => {
+const TrendingCarousel: React.FC<TrendingCarouselProps> = ({ movies }) => {
   return (
     <div className="carousel-container" style={{ position: "relative" }}>
       <Swiper

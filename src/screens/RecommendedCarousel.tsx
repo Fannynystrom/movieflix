@@ -12,7 +12,6 @@ interface RecommendedCarouselProps {
 
 const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({
   movies,
-  onMovieSelect,
 }) => {
   return (
     <div className="carousel-container" style={{ position: "relative" }}>
