@@ -8,6 +8,7 @@
   position: relative;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  background-color: #1500ff25;
 }
 
 @keyframes gradientAnimation {
@@ -36,7 +37,7 @@
   font-size: 1.2rem;
   padding: 10px;
   position: relative;
-  background: linear-gradient(45deg, #b6dbe2, #3587a0);
+  background: linear-gradient(45deg, #f7f9f9, #3587a0);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -216,6 +217,9 @@
 
   .navbar div.icons {
     gap: 2px;
+    order: 2; /* Se till att ikonerna hamnar till höger */
+    justify-content: flex-end; /* Placera sök och bokmärke ihop till höger */
+
   }
 
   /* Minska mellanrummet mellan länkarna */
