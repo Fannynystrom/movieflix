@@ -11,7 +11,6 @@ const Navigate: React.FC = () => {
   return (
     <nav className="navbar">
       <div>
-        {/* Uppdatera länkarna så att ordningen blir Trending -> Recommended -> Kategorier */}
         <Link to="/">MovieFlix</Link>
         <Link to="/categoriesscreen">Kategorier</Link>
       </div>
