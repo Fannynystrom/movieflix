@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import RecommendedCarousel from "../screens/RecommendedCarousel"; // Justera sökvägen om nödvändigt
-import { Movie } from "../types/Movies"; // Se till att importera Movie-typen
-import { BookmarksProvider } from "../context/BookmarksContext"; // Importera BookmarksProvider
+import RecommendedCarousel from "../screens/RecommendedCarousel";
+import { Movie } from "../types/Movies";
+import { BookmarksProvider } from "../context/BookmarksContext";
 
 // Mockdata för filmer
 const mockMovies: Movie[] = [
@@ -24,15 +24,28 @@ const mockMovies: Movie[] = [
     year: 2020,
     actors: ["Actor 3", "Actor 4"],
   },
-  // Lägg till fler filmer vid behov
+  {
+    title: "Movie 3",
+    genre: "Horror",
+    rating: "5",
+    synopsis: "The definition of paranoia.",
+    thumbnail: "link/to/thumbnail3.jpg",
+    year: 2020,
+    actors: ["Actor 5", "Actor 6"],
+  },
 ];
 
-// Wrappa testet med BookmarksProvider för att tillhandahålla kontext
 describe("RecommendedCarousel", () => {
+  //test.1
   it("should render movie information correctly", () => {
+    const mockOnMovieSelect = () => {}; // Mockfunktion för onMovieSelect
+
     render(
       <BookmarksProvider>
-        <RecommendedCarousel movies={mockMovies} />
+        <RecommendedCarousel
+          movies={mockMovies}
+          onMovieSelect={mockOnMovieSelect}
+        />
       </BookmarksProvider>,
     );
 
@@ -41,22 +54,32 @@ describe("RecommendedCarousel", () => {
       expect(screen.getByText(movie.title)).toBeInTheDocument();
     });
   });
-
+  //test.2
   it("should display the correct number of slides", () => {
+    const mockOnMovieSelect = () => {};
+
     render(
       <BookmarksProvider>
-        <RecommendedCarousel movies={mockMovies} />
+        <RecommendedCarousel
+          movies={mockMovies}
+          onMovieSelect={mockOnMovieSelect}
+        />
       </BookmarksProvider>,
     );
 
-    const slides = screen.getAllByRole("listitem"); // Kontrollera rollen
+    const slides = screen.getAllByRole("listitem");
     expect(slides.length).toBe(mockMovies.length); // Kontrollera att antalet slides matchar antalet filmer
   });
-
+  //test.3
   it("should show 3 slides on mobile view", () => {
+    const mockOnMovieSelect = () => {};
+
     render(
       <BookmarksProvider>
-        <RecommendedCarousel movies={mockMovies} />
+        <RecommendedCarousel
+          movies={mockMovies}
+          onMovieSelect={mockOnMovieSelect}
+        />
       </BookmarksProvider>,
     );
 

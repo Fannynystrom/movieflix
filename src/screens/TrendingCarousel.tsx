@@ -31,10 +31,7 @@ const TrendingCarousel: React.FC<TrendingCarouselProps> = ({
       >
         {movies.map((movie, index) => (
           <SwiperSlide key={index} role="listitem">
-            <MovieCard
-              {...movie}
-              onClick={() => onMovieSelect(movie)} // Pass onMovieSelect to MovieCard
-            />
+            <MovieCard {...movie} onClick={() => onMovieSelect(movie)} />
           </SwiperSlide>
         ))}
       </Swiper>
