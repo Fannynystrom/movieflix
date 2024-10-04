@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import RecommendedCarousel from "../screens/RecommendedCarousel";
+import RecommendedCarousel from "../components/RecommendedCarousel";
 import { Movie } from "../types/Movies";
 import { BookmarksProvider } from "../context/BookmarksContext";
 
