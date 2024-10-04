@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest"; // Använd vitest för tester
-import TrendingCarousel from "../screens/TrendingCarousel"; // Justera importvägen vid behov
-import { Movie } from "../types/Movies"; // Importera Movie-typen
-import { BookmarksProvider } from "../context/BookmarksContext"; // Importera BookmarksProvider
+import TrendingCarousel from "../components/TrendingCarousel";
+import { Movie } from "../types/Movies";
+import { BookmarksProvider } from "../context/BookmarksContext";
 
 // Skapa mockdata för att simulera filmer
 const mockMovies: Movie[] = [

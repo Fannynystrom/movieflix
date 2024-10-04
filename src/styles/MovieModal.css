@@ -61,7 +61,7 @@
 
 /* Titlarna i paragraferna */
 .movie-modal p strong {
-  min-width: 120px; /* Gör så att alla titlar börjar på samma position */
+  min-width: 120px;
   display: inline-block;
 }
 
@@ -79,7 +79,7 @@
 /* Ikonsektionen under bilden */
 .movie-modal-actions {
   display: flex;
-  justify-content: space-between; /* Sprider ut ikonerna jämnt */
+  justify-content: space-between;
   width: 50%;
   margin-top: 10px;
 }
@@ -87,45 +87,45 @@
 /* Stil för knapparna */
 .movie-modal-actions button {
   background-color: transparent;
-  border: 1px solid #e0e0e0; /* Lägg till border runt ikonerna */
-  border-radius: 5px; /* Rundade hörn */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
   padding: 10px;
   cursor: pointer;
   transition:
     background-color 0.2s,
     color 0.2s,
     border 0.2s;
-  flex: 1; /* Se till att knapparna tar lika mycket plats */
-  margin: 0 5px; /* Lägger till mellanrum mellan ikonerna */
+  flex: 1;
+  margin: 0 5px;
   text-align: center;
 }
 
 /* Specifik stil för hjärtikonen */
 .heart-button svg {
-  color: red; /* Gör hjärtat rött */
+  color: red;
 }
 
 /* Specifik stil för bokmärkesikonen */
 .bookmark-button svg {
-  color: #ffcc00; /* Guldaktig färg för bokmärkta objekt */
+  color: #ffcc00;
 }
 
 /* Specifik stil för ellipsis-ikonen */
 .ellipsis-button svg {
-  color: #e0e0e0; /* Neutral färg */
+  color: #e0e0e0;
 }
 
 /* Responsiv design för mindre skärmar */
 @media (max-width: 768px) {
   .movie-modal {
-    max-width: 100%; /* Tar upp hela bredden för mobiler */
+    max-width: 100%;
   }
   .movie-modal .modal-content {
     width: 90%;
     text-align: left;
   }
   .movie-modal img {
-    width: 100%; /* Bilden tar upp hela bredden på mobiler */
-    max-height: 250px; /* Begränsa maxhöjden ytterligare för små skärmar */
+    width: 100%;
+    max-height: 250px;
   }
 }

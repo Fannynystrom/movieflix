@@ -64,7 +64,7 @@
 @media (max-width: 480px) {
   .carousel-container {
     /* Justering för mobiler */
-    padding: 0 10px;
+    padding: 0 0px;
   }
 
   .swiper-slide .movie-card {
@@ -74,8 +74,9 @@
 
   .swiper-button-prev,
   .swiper-button-next {
-    padding: 6px;
-    font-size: 12px;
+    padding: 2px;
+    font-size: 10px;
+    bottom: 15px;
   }
 
   .swiper-pagination-bullet {

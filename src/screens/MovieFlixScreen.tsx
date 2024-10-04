@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TrendingCarousel from "./TrendingCarousel";
-import RecommendedCarousel from "./RecommendedCarousel";
+import TrendingCarousel from "../components/TrendingCarousel";
+import RecommendedCarousel from "../components/RecommendedCarousel";
 import useFetchMovies from "../hooks/FetchMovies";
 import { Movie } from "../types/Movies";
 import MovieModal from "../components/MovieModal";

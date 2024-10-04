@@ -38,7 +38,7 @@
 }
 .movie-info {
   margin: 10px 0;
-  font-size: 0.9rem; /* Mindre textstorlek för åldersgräns och år */
+  font-size: 0.9rem;
   color: white;
 }
 
@@ -48,7 +48,7 @@
 
 .movie-card-actions {
   display: flex;
-  justify-content: space-between; /* Sprider ut ikonerna */
+  justify-content: space-between;
   width: 80%;
   padding: 10px;
 }
@@ -56,10 +56,10 @@
 /* Stil för knapparna */
 .movie-card-actions button {
   background-color: transparent;
-  border: 1px solid #e0e0e0; /* Lägg till border runt varje knapp */
-  border-radius: 5px; /* Rundade hörn på knapparna */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.5rem; /* Standardstorlek på ikonerna */
+  font-size: 1.5rem;
   color: #e0e0e0;
   padding: 6px 10px;
   transition:
@@ -105,8 +105,8 @@
 /* Responsiv design för mobiler och iPads */
 @media (max-width: 480px) {
   .movie-card {
-    min-height: 500px; /* Se till att alla kort har minst denna höjd */
-    max-height: 500px; /* Begränsa höjden så alla kort blir lika höga */
+    min-height: 500px;
+    max-height: 500px;
     margin: 8px;
     margin-bottom: 30px;
   }
@@ -129,5 +129,6 @@
     width: 80%;
     max-width: 350px;
     height: auto;
+    margin-right: 5px;
   }
 }
