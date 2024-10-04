@@ -4,6 +4,7 @@ import { FaBookmark } from "react-icons/fa";
 import useFetchMovies from "../hooks/FetchMovies";
 import SearchBar from "../components/SearchBar";
 import "../styles/Navigation.css";
+import LogoutComponent from "../components/LogoutComponent";
 
 const Navigate: React.FC = () => {
   const { movies } = useFetchMovies();
@@ -19,6 +20,7 @@ const Navigate: React.FC = () => {
         <Link to="/bookmarked" className="bookmark-icon">
           <FaBookmark size={24} />
         </Link>
+        <LogoutComponent />
       </div>
     </nav>
   );

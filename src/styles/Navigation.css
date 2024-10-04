@@ -158,6 +158,26 @@
   color: #007bff;
 }
 
+.logout-button {
+  background: linear-gradient(45deg, #f7f9f9, #3587a0);
+  border: none;
+  padding: 10px 10px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.logout-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 /* Mobil vy */
 @media (max-width: 768px) {
   .navbar {
@@ -200,6 +220,11 @@
     position: static;
     width: 100%;
     margin-top: 10px;
+  }
+
+  .logout-button {
+    font-size: 0.7rem;
+    padding: 7px;
   }
 }
 
