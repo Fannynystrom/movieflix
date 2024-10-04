@@ -30,13 +30,13 @@ const mockData: Movie[] = [
 
 // Testa SearchBar-komponenten
 describe("SearchBar Component", () => {
-  // Kontrollera att sökikonen renderas korrekt
+  // Test 1: Kontrollera att sökikonen renderas korrekt
   it("renderar sökikonen", () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     expect(screen.getByTestId("search-icon")).toBeInTheDocument();
   });
 
-  // Testa att sökfältets synlighet växlar när ikonen klickas
+  // Test 2: Testa att sökfältets synlighet växlar när ikonen klickas
   it("växlar synligheten för sökfältet när ikonen klickas", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchIcon = screen.getByTestId("search-icon");
@@ -54,14 +54,14 @@ describe("SearchBar Component", () => {
     ).not.toHaveClass("active");
   });
 
-  // Kontrollera att inga sökresultat visas initialt
+  // Test 3: Kontrollera att inga sökresultat visas initialt
   it("visar inga sökresultat initialt", () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     // Kontrollera att det inte finns någon lista med sökresultat
     expect(screen.queryByRole("list")).not.toBeInTheDocument();
   });
 
-  // Testa att korrekta resultat visas vid sökning
+  // Test 4: Testa att korrekta resultat visas vid sökning
   it("visar korrekta resultat vid sökning", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");
@@ -73,7 +73,7 @@ describe("SearchBar Component", () => {
     expect(screen.getByText("Movie 1")).toBeInTheDocument();
   });
 
-  // Kontrollera att maximalt 8 sökresultat visas
+  // Test 5: Kontrollera att maximalt 8 sökresultat visas
   it("visar maximalt 8 sökresultat", async () => {
     const extendedData: Movie[] = [...Array(10).keys()].map((i) => ({
       title: `Movie ${i + 1}`,
@@ -96,7 +96,7 @@ describe("SearchBar Component", () => {
     expect(listItems.length).toBe(8);
   });
 
-  // Kontrollera att inga resultat visas om söksträngen raderas
+  // Test 6: Kontrollera att inga resultat visas om söksträngen raderas
   it("visar inga resultat om söksträngen raderas", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");
@@ -110,7 +110,7 @@ describe("SearchBar Component", () => {
     expect(screen.queryByText("Movie 1")).not.toBeInTheDocument();
   });
 
-  // Testa att söka korrekt på synopsis och genre
+  // Test 7: Testa att söka korrekt på synopsis och genre
   it("söker korrekt på synopsis och genre", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");
@@ -125,7 +125,7 @@ describe("SearchBar Component", () => {
     expect(screen.getByText("Movie 1")).toBeInTheDocument();
   });
 
-  // Kontrollera att modalen öppnas när en film klickas
+  // Test 8: Kontrollera att modalen öppnas när en film klickas
   it("öppnar modalen när en film klickas", async () => {
     render(
       <BookmarksProvider>
@@ -147,7 +147,7 @@ describe("SearchBar Component", () => {
     expect(screen.getByText("Synopsis 1")).toBeInTheDocument(); // Kontrollera en specifik del av modalinnehållet
   });
 
-  // Testa att inga resultat visas om sökningen inte matchar något
+  // Test 9: Testa att inga resultat visas om sökningen inte matchar något
   it("visar inga resultat om sökningen inte matchar något", async () => {
     render(<SearchBar data={mockData} />, { wrapper: BrowserRouter });
     const searchInput = screen.getByPlaceholderText("Sök filmer...");

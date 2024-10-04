@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi, Mock } from "vitest";
 import { renderHook, cleanup, waitFor } from "@testing-library/react";
-import useFetchMovies from "../hooks/FetchMovies"; // Anpassa sökvägen
-// import { onValue } from 'firebase/database'; // Importera onValue för mockning
+import useFetchMovies from "../hooks/FetchMovies";
+import { onValue } from "firebase/database";
 
 // Mocka firebase/database
 vi.mock("firebase/database", () => {
@@ -39,22 +39,118 @@ vi.mock("firebase/database", () => {
 
       return vi.fn(); // Returnera en mockad unsubscribe-funktion
     }),
-    getDatabase: vi.fn(),
+    getDatabase: vi.fn(), // Mockar getDatabase
   };
 });
 
+// Beskrivning av testsviten för useFetchMovies
 describe("useFetchMovies", () => {
+  // Rensa tidigare mocks före varje test
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.clearAllMocks(); // Rensar tidigare mocks före varje test
   });
 
+  // Avmontera alla renderade komponenter efter varje test
   afterEach(() => {
     cleanup(); // Avmontera alla renderade komponenter efter varje test
   });
 
-  it("should fetch movies and set loading to false", async () => {
+  // Test 1: Hantera fel från databasen
+  it("ska hantera fel från databasen", async () => {
+    const errorMessage = "Ett fel inträffade";
+
+    (onValue as Mock).mockImplementationOnce((_, __, errorCallback) => {
+      errorCallback(new Error(errorMessage)); // Anropa felhanteraren med ett fel
+      return vi.fn();
+    });
+
     const { result } = renderHook(() => useFetchMovies());
-    // Vänta på att tillståndet ska uppdateras
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+      expect(result.current.error).toBe(errorMessage);
+    });
+  });
+
+  // Test 2: Sätta ageRating till 'Ej specificerad' om det inte finns
+  it("ska sätta ageRating till 'Ej specificerad' om det inte finns", async () => {
+    const mockData = {
+      Film1: {
+        title: "Film 1",
+        genre: "Action",
+        rating: "5",
+        synopsis: "Spännande film",
+        thumbnail: "link/to/thumbnail1.jpg",
+        year: 2021,
+        actors: ["Actor 1", "Actor 2"],
+      },
+    };
+
+    (onValue as Mock).mockImplementationOnce((_, callback) => {
+      callback({
+        exists: () => true,
+        val: () => mockData,
+      });
+      return vi.fn();
+    });
+
+    const { result } = renderHook(() => useFetchMovies());
+
+    await waitFor(() => {
+      expect(result.current.movies[0].ageRating).toBe("Ej specificerad");
+    });
+  });
+
+  // Test 3: Returnera filmer i korrekt format
+  it("ska returnera filmer i korrekt format", async () => {
+    const { result } = renderHook(() => useFetchMovies());
+
+    await waitFor(() => {
+      result.current.movies.forEach((movie) => {
+        expect(movie).toHaveProperty("title");
+        expect(movie).toHaveProperty("genre");
+        expect(movie).toHaveProperty("rating");
+        expect(movie).toHaveProperty("synopsis");
+        expect(movie).toHaveProperty("thumbnail");
+        expect(movie).toHaveProperty("year");
+        expect(movie).toHaveProperty("actors");
+      });
+    });
+  });
+
+  // Test 4: Hantera tom filmdata
+  it("ska hantera tom filmdata", async () => {
+    (onValue as Mock).mockImplementationOnce((_, callback) => {
+      callback({
+        exists: () => true,
+        val: () => ({}), // Tom databas
+      });
+      return vi.fn(); // Returnera en mockad unsubscribe-funktion
+    });
+
+    const { result } = renderHook(() => useFetchMovies());
+
+    await waitFor(() => {
+      expect(result.current.movies.length).toBe(0); // Ingen film ska returneras
+      expect(result.current.loading).toBe(false);
+      expect(result.current.error).toBe(null);
+    });
+  });
+
+  // Test 5: Avprenumerera från databasen vid avmontering
+  it("ska avprenumerera från databasen vid avmontering", () => {
+    const { unmount } = renderHook(() => useFetchMovies());
+
+    unmount(); // Avmontera hooken
+
+    // Verifiera att unsubscribe-funktionen anropas
+    expect(onValue).toHaveBeenCalled(); // Kontrollera att onValue anropades
+  });
+
+  // Test 6: Hämta filmer och sätta loading till false
+  it("ska hämta filmer och sätta loading till false", async () => {
+    const { result } = renderHook(() => useFetchMovies());
+
     await waitFor(() => {
       expect(result.current.movies.length).toBe(2);
       expect(result.current.loading).toBe(false);
@@ -62,43 +158,8 @@ describe("useFetchMovies", () => {
     });
   });
 
-  // it('should handle error correctly', async () => {
-  //   // Mocka onValue för att simulera ett fel
-  //   (onValue as unknown).mockImplementationOnce((_, callback, errorCallback) => {
-  //     errorCallback(new Error('Firebase error'));
-  //     return vi.fn(); // Returnera en mockad unsubscribe-funktion
-  //   });
-
-  //   const { result } = renderHook(() => useFetchMovies());
-
-  //   // Vänta på att tillståndet ska uppdateras
-  //   await waitFor(() => {
-  //     expect(result.current.loading).toBe(false);
-  //     expect(result.current.error).toBe('Firebase error');
-  //     expect(result.current.movies.length).toBe(0); // Inga filmer bör hämtas vid fel
-  //   });
-  // });
-
-  // it('should return an empty array and set loading to false when no movies exist', async () => {
-  //   (onValue as unknown).mockImplementationOnce((_, callback) => {
-  //     callback({
-  //       exists: () => false,
-  //       val: () => ({}), // Ingen data
-  //     });
-  //     return vi.fn(); // Returnera en mockad unsubscribe-funktion
-  //   });
-
-  //   const { result } = renderHook(() => useFetchMovies());
-
-  //   // Vänta på att tillståndet ska uppdateras
-  //   await waitFor(() => {
-  //     expect(result.current.movies.length).toBe(0); // Ingen film ska finnas
-  //     expect(result.current.loading).toBe(false);
-  //     expect(result.current.error).toBe(null);
-  //   });
-  // });
-
-  it("should randomize movies when randomize is true", async () => {
+  // Test 7: Randomisera filmer när randomize är true
+  it("ska randomisera filmer när randomize är true", async () => {
     const { result } = renderHook(() => useFetchMovies(true));
 
     await waitFor(() => {
@@ -109,7 +170,8 @@ describe("useFetchMovies", () => {
     });
   });
 
-  it("should return correct movie details", async () => {
+  // Test 8: Returnera korrekta filmdetaljer
+  it("ska returnera korrekta filmdetaljer", async () => {
     const { result } = renderHook(() => useFetchMovies());
 
     await waitFor(() => {
