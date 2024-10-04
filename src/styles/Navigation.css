@@ -140,22 +140,40 @@
 }
 
 .search-results li {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
   padding: 10px;
-  border-bottom: 1px solid #eee;
+  position: relative;
+  background: linear-gradient(45deg, #1518b4, #3587a0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease,
+    font-size 0.3s ease;
 }
 
 .search-results li:hover {
-  background-color: #f1f1f1;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 10px;
+  position: relative;
+  background: linear-gradient(45deg, #65039273, #3587a0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease,
+    font-size 0.3s ease;
 }
 
 .search-results li a {
   text-decoration: none;
   color: black;
-}
-
-.search-results li:hover {
-  background-color: #f0f0f0;
-  color: #007bff;
 }
 
 .logout-button {
@@ -217,9 +235,8 @@
   }
 
   .search-field {
-    position: static;
     width: 100%;
-    margin-top: 10px;
+    margin: 0;
   }
 
   .logout-button {
