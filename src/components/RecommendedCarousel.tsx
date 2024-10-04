@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "./MovieCard";
 import { Movie } from "../types/Movies";
 import "../styles/slider.css";
 
