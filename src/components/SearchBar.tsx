@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
-import MovieModal from "./MovieModal"; // Importera din MovieModal-komponent
-import { Movie } from "../types/Movies"; // Se till att denna är rätt
+import MovieModal from "./MovieModal";
+import { Movie } from "../types/Movies";
 
 interface SearchBarProps {
   data: Movie[];
@@ -12,8 +12,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<Movie[]>([]);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); // State för vald film
-  const [isModalOpen, setIsModalOpen] = useState(false); // State för att hantera modalens visning
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fuse = new Fuse<Movie>(data, {
     keys: ["title", "synopsis", "genre", "actors"],
@@ -31,13 +31,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   };
 
   const handleMovieClick = (movie: Movie) => {
-    setSelectedMovie(movie); // Sätt den valda filmen
-    setIsModalOpen(true); // Öppna modalen
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Stäng modalen
-    setSelectedMovie(null); // Återställ vald film
+    setIsModalOpen(false);
+    setSelectedMovie(null);
   };
 
   return (
@@ -66,7 +66,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
         )}
       </div>
 
-      {/* Visa MovieModal om en film är vald */}
       {isModalOpen && selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={closeModal} />
       )}
